@@ -19,7 +19,7 @@ module.exports = {
                 featuresRows: '350px 100px 350px',
             },
             animation: {
-                fadeUp: 'fadeUp 0.5s ease-in-out',
+                fadeUp: 'fadeUp 0.3s ease-in-out',
             },
             keyframes: {
                 fadeUp: {

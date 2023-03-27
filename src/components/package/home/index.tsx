@@ -1,6 +1,7 @@
 import FeaturesComp from './features';
 import HeroComp from './hero';
 import CatalogComp from './catalog';
+import BenefitComp from './benefit';
 
 const HomePage = () => {
     return (
@@ -8,6 +9,7 @@ const HomePage = () => {
             <HeroComp />
             <FeaturesComp />
             <CatalogComp />
+            <BenefitComp />
         </section>
     );
 };

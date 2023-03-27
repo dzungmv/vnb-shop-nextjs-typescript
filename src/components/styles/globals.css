@@ -11,7 +11,7 @@
 ::selection {
     text-shadow: none;
     color: #fff;
-    background-color: #00f;
+    background-color: #ff0050;
 }
 
 html {
@@ -152,4 +152,9 @@ p {
     margin: 0;
     padding: 0;
     font-family: inherit;
+}
+
+/* Library css */
+.tippy-content {
+    padding: 0;
 }

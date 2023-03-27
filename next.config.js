@@ -4,7 +4,7 @@ const nextConfig = {
         appDir: true,
     },
     images: {
-        domains: ['jungjung261.blob.core.windows.net'],
+        domains: ['jungjung261.blob.core.windows.net', 'shopvnb.com'],
     },
 };
 

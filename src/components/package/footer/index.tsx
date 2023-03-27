@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className=' mt-28'>
+        <footer className='mt-28'>
             <section className=' max-w-[1260px] mx-auto flex gap-5'>
-                <div className='w-[calc(100%/4-15px)]'>
+                <div className='w-[calc(40%-15px)]'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         General Information
                     </h2>
@@ -55,6 +55,60 @@ const Footer = () => {
                             <i className='fa-brands fa-youtube text-[#FF0000]'></i>
                         </Link>
                     </div>
+                </div>
+
+                <div className='w-[calc(100%/4)]'>
+                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                        Policy
+                    </h2>
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Return Policy & Exchange
+                    </Link>{' '}
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Warranty Policy
+                    </Link>{' '}
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Shipping Policy
+                    </Link>
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Term of Use
+                    </Link>
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Privacy Policy
+                    </Link>
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Franchise policy
+                    </Link>
+                </div>
+
+                <div className='w-[calc(100%/4)]'>
+                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                        Guides
+                    </h2>
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Guide to choosing a racquet for beginners
+                    </Link>{' '}
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Guide to payment methods
+                    </Link>{' '}
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Check warranty status
+                    </Link>
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Check order status
+                    </Link>
+                    <br />
+                    <Link href={'/'} className='text-sm mb-2'>
+                        Shopping guide
+                    </Link>
                 </div>
             </section>
         </footer>
