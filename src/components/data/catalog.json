@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "Badminton Racket",
+        "href": "/badminton-racket",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/racket.webp",
+        "imageAlt": "Badminton Racket"
+    },
+    {
+        "id": 2,
+        "name": "Badminton Shoes",
+        "href": "/badminton-shoes",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/shoes.webp",
+        "imageAlt": "Badminton Shoes"
+    },
+    {
+        "id": 3,
+        "name": "Badminton Shirt",
+        "href": "/badminton-shirt",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/shirt.webp",
+        "imageAlt": "Badminton Shirt"
+    },
+    {
+        "id": 4,
+        "name": "Badminton Skirt",
+        "href": "/badminton-skirt",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/skirt.webp",
+        "imageAlt": "Badminton Skirt"
+    },
+    {
+        "id": 5,
+        "name": "Badminton Pants",
+        "href": "/badminton-pants",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/paint.webp",
+        "imageAlt": "Badminton Pants"
+    },
+    {
+        "id": 6,
+        "name": "Badminton Bag",
+        "href": "/badminton-bag",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/bag.webp",
+        "imageAlt": "Badminton Bag"
+    },
+    {
+        "id": 7,
+        "name": "Badminton Balo",
+        "href": "/badminton-balo",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/balo.webp",
+        "imageAlt": "Badminton Balo"
+    },
+    {
+        "id": 7,
+        "name": "Badminton Equipment",
+        "href": "/badminton-equipment",
+        "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/equip.webp",
+        "imageAlt": "Badminton Equipment"
+    }
+]

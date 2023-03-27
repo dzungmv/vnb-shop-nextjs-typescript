@@ -1,25 +1,9 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
-
-type SubNavTypes = {
-    name: string;
-    href?: string;
-    items?: {
-        name: string;
-        href: string;
-    };
-};
-
-interface NavTypes {
-    id: number;
-    name: string;
-    href?: string;
-    icon?: {
-        chevronUp: string;
-        chevronDown: string;
-    };
-    subnavs?: SubNavTypes[];
-}
+import 'tippy.js/dist/tippy.css';
+import { usePathname } from 'next/navigation';
 
 const navs = [
     {
@@ -155,104 +139,80 @@ const navs = [
         name: 'Badminton News',
         href: 'badminton-news',
     },
-    {
-        id: 5,
-        name: 'Franchise Policy',
-        href: 'franchise-policy',
-    },
-    {
-        id: 6,
-        name: 'Guide',
-        subnavs: [
-            {
-                name: 'Payment Guide',
-                href: 'payment-guide',
-            },
-            {
-                name: 'Buying Guide',
-                href: 'buying-guide',
-            },
-            {
-                name: 'How to buy a badminton racket',
-                href: 'how-to-buy-a-badminton-racket',
-            },
-        ],
-    },
-    {
-        id: 7,
-        name: 'About Us',
-        href: 'about-us',
-    },
-    {
-        id: 8,
-        name: 'Contact',
-        href: 'contact',
-    },
 ];
 
 const Header = () => {
-    return (
-        <header className='pt-2'>
-            <div className=' flex items-center justify-between max-w-[1260px] mx-auto w-full h-[50px]'>
-                <div className='flex items-center gap-4 h-full'>
-                    <figure className=' w-[50px] h-full'>
-                        <Image
-                            className='w-full h-full object-cover'
-                            src={'/icon.png'}
-                            alt='ShopVNB'
-                            width='0'
-                            height='0'
-                            sizes='100vw'
-                            priority
-                        />
-                    </figure>
+    const isLogin: boolean = false;
+    const pathname = usePathname();
 
-                    <div className='w-[300px] h-[70%] bg-bgGray rounded-[20px] flex items-center gap-2 px-3'>
+    return (
+        <header className='bg-white  w-ful h-[50px] shadow-md sticky top-0 left-0 right-0 z-[1000]'>
+            <div className='max-w-[1260px] h-full mx-auto flex items-center justify-between'>
+                <div className='flex items-center gap-6 h-full'>
+                    <Link href='/'>
+                        <figure className=' w-[50px] h-full'>
+                            <Image
+                                className='w-full h-full object-cover'
+                                src={'/icon.png'}
+                                alt='ShopVNB'
+                                width='0'
+                                height='0'
+                                sizes='100vw'
+                                priority
+                            />
+                        </figure>
+                    </Link>
+                    <nav className='flex h-full'>
+                        {navs.map((nav) => {
+                            return (
+                                <Link
+                                    key={nav.id}
+                                    href={nav?.href || ''}
+                                    className={
+                                        pathname === nav.href
+                                            ? 'flex items-center justify-center h-full px-5 hover font-medium text-colorPrimary border-b-2 border-colorPrimary'
+                                            : 'flex items-center justify-center h-full px-5 hover font-medium hover:opacity-50'
+                                    }>
+                                    {nav?.name}
+                                </Link>
+                            );
+                        })}
+                    </nav>
+                </div>
+                <div className=' flex-1 flex items-center justify-end gap-4 h-full'>
+                    <div className='w-[300px] bg-bgGray rounded-[20px] flex items-center gap-2 px-3'>
                         <i className='fa-regular fa-magnifying-glass text-gray-500 '></i>
                         <input
-                            className=' bg-transparent h-full w-full text-sm  placeholder:text-gray-500'
+                            className=' bg-transparent py-px10 w-full text-sm  placeholder:text-gray-500'
                             type='text'
                             placeholder='Search product...'
                         />
                     </div>
-                </div>
 
-                <div className=' flex-1 flex items-center justify-end gap-4'>
-                    <div className='flex items-center gap-1'>
-                        <i className='fa-solid fa-user-headset text-colorPrimary'></i>
-                        <div className='flex items-center gap-1'>
-                            <p className='text-sm'>Hotline:</p>
-                            <address className='text-colorPrimary text-sm font-medium'>
-                                1900 636 636
-                            </address>
-                        </div>
-                    </div>
+                    {isLogin ? (
+                        <>
+                            <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
+                                <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
+                            </div>
 
-                    <div className='w-[1px] h-[25px] bg-black'></div>
-
-                    <div className='flex items-center gap-1'>
-                        <i className='fa-solid fa-location-arrow text-colorPrimary'></i>
-                        <div className='flex items-center gap-1'>
-                            <Link href={'#!'} className=' text-sm'>
-                                Stores system
-                            </Link>
-                        </div>
-                    </div>
-
-                    <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                        <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
-                    </div>
-                    <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                        <i className='fa-solid fa-cart-shopping text-colorPrimary group-hover:text-white'></i>
-                    </div>
+                            <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
+                                <i className='fa-solid fa-cart-shopping text-colorPrimary group-hover:text-white'></i>
+                            </div>
+                        </>
+                    ) : (
+                        <>
+                            <div className='flex gap-3'>
+                                <button className='text-sm text-colorPrimary font-medium hover:text-colorPrimaryHover'>
+                                    Sign in
+                                </button>
+                                <button className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
+                                    Sign up
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
-
-            <nav className=' max-w-[1200px] mx-auto mt-3 flex items-center justify-between'>
-                {navs.map((nav: NavTypes) => {
-                    return <div key={nav.id}>{nav.name}</div>;
-                })}
-            </nav>
         </header>
     );
 };
