@@ -12,8 +12,8 @@ export interface FilterItem {
     value: string;
 }
 
-export interface ProductCard {
-    id: string;
+export type ProductCard = {
+    id: string | number;
     name: string;
     slug: string;
     price: number;

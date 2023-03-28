@@ -6,11 +6,11 @@ const ProductCard: React.FC<ProductCard> = (props) => {
     const { name, slug, price, imageSrc } = props;
 
     return (
-        <Link href={slug} passHref target='_blank'>
-            <article className='border border-transparent hover:border-colorPrimary hover:cursor-pointer transition-all rounded-lg'>
+        <Link href={`/product/${slug}`} passHref>
+            <article className='group hover:cursor-pointer rounded-lg border border-transparent hover:border-gray-200 transition-all duration-200'>
                 <figure className='w-full h-[220px]'>
                     <Image
-                        className='w-full h-full object-cover rounded-t-lg'
+                        className='w-full h-full object-cover rounded-t-lg group-hover:opacity-[0.7] transition-all duration-200'
                         src={imageSrc}
                         alt='Product Card'
                         width='0'
@@ -19,8 +19,10 @@ const ProductCard: React.FC<ProductCard> = (props) => {
                     />
                 </figure>
                 <div className='mt-4 p-2'>
-                    <p>{name}</p>
-                    <p className='text-center mt-1 text-colorPrimary font-medium'>{`${price.toLocaleString()} ₫`}</p>
+                    <p className='text-center group-hover:text-colorPrimary transition-all duration-200'>
+                        {name}
+                    </p>
+                    <p className='text-center mt-1 text-colorPrimary font-medium'>{`${price.toLocaleString()}₫`}</p>
                 </div>
             </article>
         </Link>

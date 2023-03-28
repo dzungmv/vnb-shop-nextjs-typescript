@@ -21,7 +21,7 @@ const CatalogComp = () => {
                             className={
                                 'group w-[calc(100%/4-15px)] h-[200px] rounded-lg relative overflow-hidden flex items-center justify-center transition-all hover:bg-[rgba(0,0,0,0.7)] hover:cursor-pointer'
                             }
-                            href={item.href}>
+                            href={`/product/${item.href}`}>
                             <Image
                                 className='w-full h-full object-cover rounded-lg z-[-1]'
                                 src={item.imageSrc}

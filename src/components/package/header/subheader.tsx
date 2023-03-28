@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 const SubHeaderComp = () => {
     return (
-        <section className='py-1 bg-colorPrimary'>
+        <section className='py-1 bg-colorPrimary tablet:px-4'>
             <div className='max-w-[1260px] mx-auto flex items-center justify-between'>
                 <div></div>
                 <div className='flex items-center  gap-3'>

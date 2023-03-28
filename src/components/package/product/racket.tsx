@@ -173,11 +173,47 @@ const RacketComp: React.FC = () => {
                     </div>
                 </header>
 
-                <div>
-                    <div className='w-[calc(100%/4)]'>
+                <div className='flex flex-wrap gap-3 mt-3'>
+                    <div className='w-[calc(100%/4-9px)]'>
                         <ProductCard
                             id='1'
-                            name='Vợt Cầu Lông Vicleo Power 7000'
+                            name='Vicleo Power 7000'
+                            slug='vicleo-power-7000'
+                            price={2000000}
+                            imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
+                        />
+                    </div>
+                    <div className='w-[calc(100%/4-9px)]'>
+                        <ProductCard
+                            id='1'
+                            name='Vicleo Power 7000'
+                            slug='vicleo-power-7000'
+                            price={2000000}
+                            imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
+                        />
+                    </div>
+                    <div className='w-[calc(100%/4-9px)]'>
+                        <ProductCard
+                            id='1'
+                            name='Vicleo Power 7000'
+                            slug='vicleo-power-7000'
+                            price={2000000}
+                            imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
+                        />
+                    </div>
+                    <div className='w-[calc(100%/4-9px)]'>
+                        <ProductCard
+                            id='1'
+                            name='Vicleo Power 7000'
+                            slug='vicleo-power-7000'
+                            price={2000000}
+                            imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
+                        />
+                    </div>
+                    <div className='w-[calc(100%/4-9px)]'>
+                        <ProductCard
+                            id='1'
+                            name='Vicleo Power 7000'
                             slug='vicleo-power-7000'
                             price={2000000}
                             imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
