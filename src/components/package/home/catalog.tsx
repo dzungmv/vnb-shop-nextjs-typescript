@@ -19,7 +19,7 @@ const CatalogComp = () => {
                         <Link
                             key={item.id}
                             className={
-                                'group w-[calc(100%/4-15px)] h-[200px] rounded-lg relative overflow-hidden flex items-center justify-center transition-all hover:bg-[rgba(0,0,0,0.7)] hover:cursor-pointer'
+                                'group w-[calc(100%/4-15px)] h-[200px] rounded-lg relative overflow-hidden flex items-center justify-center transition-all hover:bg-[rgba(0,0,0,0.7)] hover:cursor-pointer mobile:w-full onlyTablet:w-[calc(100%/2-15px)]'
                             }
                             href={`/product/${item.href}`}>
                             <Image

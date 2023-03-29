@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 const HeroComp = () => {
     return (
-        <section className='flex justify-between items-center pt-2 w-full'>
-            <div className='w-[50%] pl-20'>
+        <section className='flex justify-between items-center pt-2 w-full flex-wrap mobile:mt-5'>
+            <div className='w-[50%] pl-20 tablet:pl-0 mobile:w-full mobile:text-center'>
                 <h1 className=' text-[40px] font-semibold'>
                     Deeply reduce badminton products, <strong>upto 70%</strong>
                 </h1>
@@ -14,13 +14,13 @@ const HeroComp = () => {
                     badminton products
                 </p>
 
-                <button className='mt-20 py-3 px-6 bg-colorPrimary text-white rounded-md hover:bg-colorPrimaryHover'>
+                <button className='mt-20 mobile:mt-9 py-3 px-6 bg-colorPrimary text-white rounded-md hover:bg-colorPrimaryHover'>
                     <Link className='' href='sell-off'>
                         Shop now
                     </Link>
                 </button>
             </div>
-            <figure className='w-[50%] h-[500px]'>
+            <figure className='w-[50%] h-[500px] mobile:w-full'>
                 <Image
                     className='w-full h-full object-cover'
                     src={

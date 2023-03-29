@@ -8,7 +8,7 @@ const ProductCard: React.FC<ProductCard> = (props) => {
     return (
         <Link href={`/product/${slug}`} passHref>
             <article className='group hover:cursor-pointer rounded-lg border border-transparent hover:border-gray-200 transition-all duration-200'>
-                <figure className='w-full h-[220px]'>
+                <figure className='w-full'>
                     <Image
                         className='w-full h-full object-cover rounded-t-lg group-hover:opacity-[0.7] transition-all duration-200'
                         src={imageSrc}

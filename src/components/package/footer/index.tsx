@@ -2,9 +2,9 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className='mt-28'>
-            <section className=' max-w-[1260px] mx-auto flex gap-5'>
-                <div className='w-[calc(40%-15px)]'>
+        <footer className='mt-28 laptop:px-4 tablet:px-4'>
+            <section className=' max-w-[1260px] mx-auto flex flex-wrap gap-5 gap-y-6'>
+                <div className='w-[calc(40%-15px)] onlyTablet:w-[calc(60%-15px)] mobile:w-full'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         General Information
                     </h2>
@@ -26,7 +26,7 @@ const Footer = () => {
                     </p>
                 </div>
 
-                <div className='w-[calc(100%/4)]'>
+                <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(40%-15px)] mobile:w-full'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         Contact Informations
                     </h2>
@@ -57,7 +57,7 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className='w-[calc(100%/4)]'>
+                <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(100%/2-15px)] mobile:w-full'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         Policy
                     </h2>
@@ -86,7 +86,7 @@ const Footer = () => {
                     </Link>
                 </div>
 
-                <div className='w-[calc(100%/4)]'>
+                <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(100%/2-15px)] mobile:w-full'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         Guides
                     </h2>

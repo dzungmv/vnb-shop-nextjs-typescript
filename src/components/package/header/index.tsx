@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import 'tippy.js/dist/tippy.css';
 import { usePathname } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import SearchComp from './search';
 
 const navs = [
     {
@@ -147,11 +148,31 @@ const Header = () => {
     const pathname = usePathname();
 
     const [isShow, setIsShow] = useState<boolean>(false);
+    const [searchContainer, setSearchContainer] = useState<boolean>(false);
+
+    useEffect(() => {
+        const handleClickOutside = (event: any) => {
+            if (searchContainer && event.target.closest('.search-mobile')) {
+                return;
+            }
+            setSearchContainer(false);
+        };
+
+        document.addEventListener('click', handleClickOutside);
+
+        return () => {
+            document.removeEventListener('click', handleClickOutside);
+        };
+    }, [searchContainer]);
+
+    const handleCloseSearch = () => {
+        setSearchContainer(false);
+    };
 
     return (
         <>
-            <header className='bg-white w-ful h-[50px] shadow-md sticky top-0 left-0 right-0 z-[1000] tablet:px-4'>
-                <div className='max-w-[1260px] h-full mx-auto flex items-center justify-between'>
+            <header className='bg-white w-ful h-[50px] shadow-md sticky top-0 left-0 right-0 z-[1000] laptop:px-4 tablet:px-4'>
+                <div className='max-w-[1260px] h-full mx-auto flex items-center justify-between relative'>
                     <div className='flex items-center gap-6 h-full'>
                         <Link href='/'>
                             <figure className=' w-[50px] h-full'>
@@ -166,6 +187,27 @@ const Header = () => {
                                 />
                             </figure>
                         </Link>
+
+                        <div
+                            className='w-[300px] border rounded-full flex items-center px-3 gap-2 justify-center cursor-pointer tablet:w-10 tablet:h-10'
+                            onClick={() => setSearchContainer(true)}>
+                            <i className='fa-regular fa-magnifying-glass text-gray-500 '></i>
+                            <div className='w-full py-2 text-sm text-gray-500 tablet:hidden'>
+                                Search products...
+                            </div>
+                        </div>
+
+                        {searchContainer && (
+                            <div className='search-mobile z-[1001] w-[40%] h-full bg-white absolute l-0 animate-fadeInLeft flex items-center tablet:w-full '>
+                                <SearchComp
+                                    changeState={() =>
+                                        setSearchContainer(false)
+                                    }
+                                />
+                            </div>
+                        )}
+                    </div>
+                    <div className=' flex-1 flex items-center justify-end gap-4 h-full'>
                         <nav className='flex h-full tablet:hidden'>
                             {navs.map((nav) => {
                                 return (
@@ -182,16 +224,6 @@ const Header = () => {
                                 );
                             })}
                         </nav>
-                    </div>
-                    <div className=' flex-1 flex items-center justify-end gap-4 h-full'>
-                        <div className='w-[300px] bg-bgGray rounded-[20px] flex items-center gap-2 px-3'>
-                            <i className='fa-regular fa-magnifying-glass text-gray-500 '></i>
-                            <input
-                                className=' bg-transparent py-px10 w-full text-sm  placeholder:text-gray-500'
-                                type='text'
-                                placeholder='Search product...'
-                            />
-                        </div>
 
                         {isLogin ? (
                             <>

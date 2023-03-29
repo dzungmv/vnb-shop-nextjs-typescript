@@ -1,7 +1,6 @@
 import Footer from '@/components/package/footer';
 import Header from '@/components/package/header';
 import SubHeaderComp from '@/components/package/header/subheader';
-import NavComp from '@/components/package/navbar';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
     return (
@@ -9,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SubHeaderComp />
             <section>
                 <Header />
-                <main>{children}</main>
+                <main className=' laptop:px-4 tablet:px-4'>{children}</main>
             </section>
             <Footer />
         </>

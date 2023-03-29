@@ -10,6 +10,7 @@ module.exports = {
             },
             screens: {
                 mobile: { max: '600px' },
+                onlyTablet: { min: '601px', max: '1023px' },
                 tablet: { max: '1023px' },
                 laptop: {
                     min: '1024px',
@@ -26,6 +27,9 @@ module.exports = {
                 fadeUp: 'fadeUp 0.3s ease-in-out',
                 fadeInLeft:
                     'fadeInLeft 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+                fadeInRight:
+                    'fadeInRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+                bell: 'bell 1s ease-in-out infinite',
             },
             keyframes: {
                 fadeUp: {
@@ -47,6 +51,16 @@ module.exports = {
                         opacity: 1,
                         transform: 'translateX(0)',
                     },
+                },
+
+                fadeInRight: {
+                    '0%': { opacity: 0, transform: 'translateX(100%)' },
+                    '100%': { opacity: 1, transform: 'translateX(0)' },
+                },
+                bell: {
+                    '0%': { transform: 'scale(1)' },
+                    '50%': { transform: 'scale(1.2)' },
+                    '100%': { transform: 'scale(1)' },
                 },
             },
         },
