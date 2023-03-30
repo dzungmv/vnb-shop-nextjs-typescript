@@ -2,8 +2,8 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className='mt-28 laptop:px-4 tablet:px-4'>
-            <section className=' max-w-[1260px] mx-auto flex flex-wrap gap-5 gap-y-6'>
+        <footer className='mt-28 laptop:px-4 tablet:px-4  border-t pt-6'>
+            <section className=' max-w-[1260px] mx-auto flex flex-wrap gap-5 gap-y-6 mb-10'>
                 <div className='w-[calc(40%-15px)] onlyTablet:w-[calc(60%-15px)] mobile:w-full'>
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         General Information
@@ -110,6 +110,22 @@ const Footer = () => {
                         Shopping guide
                     </Link>
                 </div>
+            </section>
+
+            <section className='text-center pb-3'>
+                <p className=' text-sm'>
+                    Copy right &#169; 2023 VNB Sports | All rights reserved
+                </p>
+                <p className='text-sm'>
+                    Clone and design by{' '}
+                    <Link
+                        className=' font-medium text-colorPrimary'
+                        href={'https://www.facebook.com/jungjung.2601/'}
+                        passHref
+                        target='_blank'>
+                        jungjung261
+                    </Link>
+                </p>
             </section>
         </footer>
     );

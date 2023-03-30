@@ -16,130 +16,17 @@ const navs = [
     {
         id: 2,
         name: 'Products',
-        icon: {
-            chevronUp: 'fa-solid fa-chevron-up',
-            chevronDown: 'fa-solid fa-chevron-down',
-        },
-        subnavs: [
-            {
-                name: 'Badminton Racket',
-                items: [
-                    {
-                        name: 'Yonex Racket',
-                        href: '#',
-                    },
-                    {
-                        name: 'Victor Racket',
-                        href: '#',
-                    },
-                    {
-                        name: 'Lining Racket',
-                        href: '#',
-                    },
-                    {
-                        name: 'Mizuno Racket',
-                        href: '#',
-                    },
-                ],
-            },
-
-            {
-                name: 'Badminton Shoes',
-                items: [
-                    {
-                        name: 'Yonex Shoes',
-                        href: '#',
-                    },
-                    {
-                        name: 'Victor Shoes',
-                        href: '#',
-                    },
-                    {
-                        name: 'Lining Shoes',
-                        href: '#',
-                    },
-                    {
-                        name: 'Mizuno Shoes',
-                        href: '#',
-                    },
-                ],
-            },
-
-            {
-                name: 'Badminton Shirt',
-                items: [
-                    {
-                        name: 'Yonex Shirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Victor Shirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Lining Shirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Mizuno Shirt',
-                        href: '#',
-                    },
-                ],
-            },
-            {
-                name: 'Badminton Skirt',
-                items: [
-                    {
-                        name: 'Yonex Skirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Victor Skirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Lining Skirt',
-                        href: '#',
-                    },
-                    {
-                        name: 'Mizuno Skirt',
-                        href: '#',
-                    },
-                ],
-            },
-
-            {
-                name: 'Badminton Pants',
-                items: [
-                    {
-                        name: 'Yonex Paints',
-                        href: '#',
-                    },
-                    {
-                        name: 'Victor Paints',
-                        href: '#',
-                    },
-                    {
-                        name: 'Lining Paints',
-                        href: '#',
-                    },
-                    {
-                        name: 'Mizuno Paints',
-                        href: '#',
-                    },
-                ],
-            },
-        ],
+        href: '/product',
     },
     {
         id: 3,
         name: 'Sale off',
-        href: 'sale-off',
+        href: '/',
     },
     {
         id: 4,
         name: 'Badminton News',
-        href: 'badminton-news',
+        href: '/',
     },
 ];
 
@@ -239,13 +126,17 @@ const Header = () => {
                             </>
                         ) : (
                             <>
-                                <div className='flex gap-3 tablet:hidden'>
-                                    <button className='text-sm text-colorPrimary font-medium hover:text-colorPrimaryHover'>
+                                <div className='flex gap-3 tablet:hidden items-center'>
+                                    <Link
+                                        href='/login'
+                                        className='text-colorPrimary font-medium hover:text-colorPrimaryHover'>
                                         Sign in
-                                    </button>
-                                    <button className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
+                                    </Link>
+                                    <Link
+                                        href='/register'
+                                        className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
                                         Sign up
-                                    </button>
+                                    </Link>
                                 </div>
                             </>
                         )}

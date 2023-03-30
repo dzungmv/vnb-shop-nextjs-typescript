@@ -1,14 +1,19 @@
 'use client';
 
 import { FilterItem } from '@/components/types';
-import { useState } from 'react';
 import Tippy from '@tippyjs/react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useState } from 'react';
 import 'tippy.js/themes/light.css';
 
-import filterUI from '@/components/data/filter.json';
-import ProductCard from '@/components/common/product-card';
+import catalogData from '@/components/data/catalog.json';
+import { CatalogItem } from '@/components/types';
 
-const RacketComp: React.FC = () => {
+import ProductCard from '@/components/common/product-card';
+import filterUI from '@/components/data/filter.json';
+
+const ProductsPage: React.FC = () => {
     const [isHover, setIsHover] = useState<boolean>(false);
     return (
         <>
@@ -176,6 +181,32 @@ const RacketComp: React.FC = () => {
                         </div>
                     </header>
 
+                    <div className='flex flex-wrap my-5 gap-5'>
+                        {catalogData.map((item: CatalogItem) => {
+                            return (
+                                <Link
+                                    key={item.id}
+                                    className={
+                                        'group w-[calc(100%/4-15px)] h-[100px] rounded-lg relative overflow-hidden flex items-center justify-center transition-all hover:bg-[rgba(0,0,0,0.7)] hover:cursor-pointer mobile:w-full onlyTablet:w-[calc(100%/2-15px)]'
+                                    }
+                                    href={`/product/${item.href}`}>
+                                    <Image
+                                        className='w-full h-full object-cover rounded-lg z-[-1]'
+                                        src={item.imageSrc}
+                                        alt={item.imageAlt}
+                                        width='0'
+                                        height='0'
+                                        sizes='100vw'
+                                    />
+
+                                    <div className='absolute text-white font-medium text-lg animate-fadeUp hidden group-hover:block z-1'>
+                                        {item.name}
+                                    </div>
+                                </Link>
+                            );
+                        })}
+                    </div>
+
                     <div className='flex flex-wrap gap-3 mt-3'>
                         {[1, 2, 4, 5, 6, 7].map((item: any, index: number) => {
                             return (
@@ -203,6 +234,6 @@ const RacketComp: React.FC = () => {
     );
 };
 
-RacketComp.displayName = 'RacketComp';
+ProductsPage.displayName = 'ProductsPage';
 
-export default RacketComp;
+export default ProductsPage;
