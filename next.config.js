@@ -6,6 +6,9 @@ const nextConfig = {
     images: {
         domains: ['jungjung261.blob.core.windows.net', 'shopvnb.com'],
     },
+    env: {
+        SERVER_URL: process.env.SERVER_URL,
+    },
 };
 
 module.exports = nextConfig;

@@ -1,3 +1,19 @@
+export type UserTypes = {
+
+    user: {
+        id: string | number;
+        name: string;
+        email: string;
+        role: string;
+        verified: boolean;
+    },
+    tokens: {
+        accessToken: string;
+        refreshToken: string;
+    }
+
+}
+
 export interface CatalogItem {
     id: number;
     name: string;

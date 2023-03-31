@@ -30,6 +30,7 @@ module.exports = {
                 fadeInRight:
                     'fadeInRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
                 bell: 'bell 1s ease-in-out infinite',
+                rotate: 'rotate 1s linear infinite',
             },
             keyframes: {
                 fadeUp: {
@@ -61,6 +62,11 @@ module.exports = {
                     '0%': { transform: 'scale(1)' },
                     '50%': { transform: 'scale(1.2)' },
                     '100%': { transform: 'scale(1)' },
+                },
+
+                rotate: {
+                    '0%': { transform: 'rotate(0deg)' },
+                    '100%': { transform: 'rotate(360deg)' },
                 },
             },
         },

@@ -15,7 +15,7 @@ const HeroComp = () => {
                 </p>
 
                 <button className='mt-20 mobile:mt-9 py-3 px-6 bg-colorPrimary text-white rounded-md hover:bg-colorPrimaryHover'>
-                    <Link className='' href='sell-off'>
+                    <Link className='' href='/product'>
                         Shop now
                     </Link>
                 </button>

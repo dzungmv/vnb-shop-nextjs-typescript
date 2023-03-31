@@ -4,8 +4,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import 'tippy.js/dist/tippy.css';
 import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import Tippy from '@tippyjs/react';
+import 'tippy.js/themes/light.css';
+
 import SearchComp from './search';
+import { UserTypes } from '@/components/types';
+import TippyComp from './tippy';
 
 const navs = [
     {
@@ -21,18 +27,22 @@ const navs = [
     {
         id: 3,
         name: 'Sale off',
-        href: '/',
+        href: '',
     },
     {
         id: 4,
         name: 'Badminton News',
-        href: '/',
+        href: '',
     },
 ];
 
 const Header = () => {
     const isLogin: boolean = false;
     const pathname = usePathname();
+
+    const tippyRef = useRef(null);
+
+    const user = useSelector((state: any) => state.user.user as UserTypes);
 
     const [isShow, setIsShow] = useState<boolean>(false);
     const [searchContainer, setSearchContainer] = useState<boolean>(false);
@@ -112,32 +122,48 @@ const Header = () => {
                             })}
                         </nav>
 
-                        {isLogin ? (
+                        {user.tokens.accessToken ? (
                             <>
                                 <>
                                     <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                                        <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
-                                    </div>
-
-                                    <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
                                         <i className='fa-solid fa-cart-shopping text-colorPrimary group-hover:text-white'></i>
+                                    </div>
+                                    <Tippy
+                                        ref={tippyRef}
+                                        content={
+                                            <TippyComp tipRef={tippyRef} />
+                                        }
+                                        placement='bottom'
+                                        trigger='click'
+                                        arrow={false}
+                                        theme='light'
+                                        interactive>
+                                        <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
+                                            <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
+                                        </div>
+                                    </Tippy>
+
+                                    <div>
+                                        <p>{user.user.name}</p>
                                     </div>
                                 </>
                             </>
                         ) : (
                             <>
-                                <div className='flex gap-3 tablet:hidden items-center'>
-                                    <Link
-                                        href='/login'
-                                        className='text-colorPrimary font-medium hover:text-colorPrimaryHover'>
-                                        Sign in
-                                    </Link>
-                                    <Link
-                                        href='/register'
-                                        className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
-                                        Sign up
-                                    </Link>
-                                </div>
+                                {pathname !== '/auth' && (
+                                    <div className='flex gap-3 tablet:hidden items-center'>
+                                        <Link
+                                            href='/auth'
+                                            className='text-colorPrimary font-medium hover:text-colorPrimaryHover'>
+                                            Sign in
+                                        </Link>
+                                        <Link
+                                            href='/auth'
+                                            className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
+                                            Sign up
+                                        </Link>
+                                    </div>
+                                )}
                             </>
                         )}
 
