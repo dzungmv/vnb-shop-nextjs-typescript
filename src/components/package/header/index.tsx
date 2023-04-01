@@ -1,17 +1,21 @@
 'use client';
 
+import Tippy from '@tippyjs/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import 'tippy.js/dist/tippy.css';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Tippy from '@tippyjs/react';
+import { useDispatch, useSelector } from 'react-redux';
+import 'react-toastify/dist/ReactToastify.css';
+import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
-import SearchComp from './search';
+import Modal from '@/components/common/modal';
+import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import { UserTypes } from '@/components/types';
+import SearchComp from './search';
 import TippyComp from './tippy';
+import VefifyModal from './verify-modal';
 
 const navs = [
     {
@@ -37,12 +41,14 @@ const navs = [
 ];
 
 const Header = () => {
-    const isLogin: boolean = false;
     const pathname = usePathname();
+
+    const dispatch = useDispatch();
 
     const tippyRef = useRef(null);
 
     const user = useSelector((state: any) => state.user.user as UserTypes);
+    const verifyModal = useSelector((state: any) => state.modal.verify);
 
     const [isShow, setIsShow] = useState<boolean>(false);
     const [searchContainer, setSearchContainer] = useState<boolean>(false);
@@ -61,10 +67,6 @@ const Header = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, [searchContainer]);
-
-    const handleCloseSearch = () => {
-        setSearchContainer(false);
-    };
 
     return (
         <>
@@ -86,7 +88,7 @@ const Header = () => {
                         </Link>
 
                         <div
-                            className='w-[300px] border rounded-full flex items-center px-3 gap-2 justify-center cursor-pointer tablet:w-10 tablet:h-10'
+                            className='w-[300px] border rounded-full flex items-center px-3 gap-2 justify-center cursor-pointer tablet:w-10 tablet:h-10 hover:cursor-text'
                             onClick={() => setSearchContainer(true)}>
                             <i className='fa-regular fa-magnifying-glass text-gray-500 '></i>
                             <div className='w-full py-2 text-sm text-gray-500 tablet:hidden'>
@@ -95,7 +97,7 @@ const Header = () => {
                         </div>
 
                         {searchContainer && (
-                            <div className='search-mobile z-[1001] w-[40%] h-full bg-white absolute l-0 animate-fadeInLeft flex items-center tablet:w-full '>
+                            <div className='search-mobile z-[1001] w-[40%] h-full bg-white absolute l-0 animate-fadeInLeft flex items-center tablet:w-full  '>
                                 <SearchComp
                                     changeState={() =>
                                         setSearchContainer(false)
@@ -122,31 +124,37 @@ const Header = () => {
                             })}
                         </nav>
 
-                        {user.tokens.accessToken ? (
+                        {user?.tokens?.accessToken ? (
                             <>
-                                <>
-                                    <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                                        <i className='fa-solid fa-cart-shopping text-colorPrimary group-hover:text-white'></i>
+                                <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 transition-all ease-in duration-[0.3s]'>
+                                    <i className='fa-solid fa-cart-shopping group-hover:text-colorPrimary'></i>
+                                </div>
+                                <Tippy
+                                    ref={tippyRef}
+                                    content={<TippyComp tipRef={tippyRef} />}
+                                    placement='bottom'
+                                    arrow={false}
+                                    theme='light'
+                                    interactive>
+                                    <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 relative'>
+                                        <i className='fa-solid fa-user hover:text-colorPrimary'></i>
+                                        {user?.user?.verified ? (
+                                            <div className=' absolute bottom-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-green-500'>
+                                                <i className='fa-solid fa-check text-white text-xs'></i>
+                                            </div>
+                                        ) : (
+                                            <div className=' absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
+                                                <span className='text-xs text-white'>
+                                                    1
+                                                </span>
+                                            </div>
+                                        )}
                                     </div>
-                                    <Tippy
-                                        ref={tippyRef}
-                                        content={
-                                            <TippyComp tipRef={tippyRef} />
-                                        }
-                                        placement='bottom'
-                                        trigger='click'
-                                        arrow={false}
-                                        theme='light'
-                                        interactive>
-                                        <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                                            <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
-                                        </div>
-                                    </Tippy>
+                                </Tippy>
 
-                                    <div>
-                                        <p>{user.user.name}</p>
-                                    </div>
-                                </>
+                                <div>
+                                    <p>{user.user.name}</p>
+                                </div>
                             </>
                         ) : (
                             <>
@@ -202,27 +210,28 @@ const Header = () => {
 
                     <div className=' mt-3'>
                         <div>
-                            {isLogin ? (
+                            {user?.tokens?.accessToken ? (
                                 <>
-                                    <>
-                                        <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                                            <i className='fa-solid fa-user text-colorPrimary group-hover:text-white'></i>
-                                        </div>
-
-                                        <div className='group w-[40px] h-[40px] rounded-full border border-colorPrimary flex items-center justify-center hover:cursor-pointer hover:bg-colorPrimary transition-all ease-in duration-[0.3s]'>
-                                            <i className='fa-solid fa-cart-shopping text-colorPrimary group-hover:text-white'></i>
-                                        </div>
-                                    </>
+                                    <p>
+                                        Hello,{' '}
+                                        <strong className=' text-colorPrimary'>
+                                            {user?.user?.name}
+                                        </strong>{' '}
+                                    </p>
                                 </>
                             ) : (
                                 <>
                                     <div className='flex gap-3'>
-                                        <button className='py-2 px-4 border border-colorPrimary bg-colorPrimary rounded-lg text-sm text-white font-medium hover:bg-colorPrimaryHover'>
+                                        <Link
+                                            href={'/auth'}
+                                            className='py-2 px-4 border border-colorPrimary bg-colorPrimary rounded-lg text-sm text-white font-medium hover:bg-colorPrimaryHover'>
                                             Sign in
-                                        </button>
-                                        <button className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
+                                        </Link>
+                                        <Link
+                                            href={'/auth'}
+                                            className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
                                             Sign up
-                                        </button>
+                                        </Link>
                                     </div>
                                 </>
                             )}
@@ -246,6 +255,16 @@ const Header = () => {
                         </div>
                     </div>
                 </section>
+            )}
+
+            {verifyModal && (
+                <Modal
+                    title='Verify account'
+                    open={verifyModal}
+                    closeOutside
+                    close={() => dispatch(setVerifyModal(false))}>
+                    <VefifyModal />
+                </Modal>
             )}
         </>
     );

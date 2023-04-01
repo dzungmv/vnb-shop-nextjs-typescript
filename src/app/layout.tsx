@@ -1,6 +1,4 @@
 import { Providers } from '@/components/redux/provider';
-
-import 'react-toastify/dist/ReactToastify.css';
 import '../components/styles/globals.css';
 
 export const metadata = {

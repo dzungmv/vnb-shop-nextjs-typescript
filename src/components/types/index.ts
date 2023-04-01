@@ -1,7 +1,7 @@
 export type UserTypes = {
 
     user: {
-        id: string | number;
+        _id: string | number;
         name: string;
         email: string;
         role: string;

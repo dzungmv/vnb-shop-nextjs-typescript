@@ -1,12 +1,13 @@
 'use client';
 
 import LoadingCard from '@/components/common/loading-card';
+import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import { logout } from '@/components/redux/user/userSlice';
 import { UserTypes } from '@/components/types';
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 type TippyCompProps = {
     tipRef: any;
@@ -16,28 +17,38 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
     const dispatch = useDispatch();
 
     const [isPending, setIsPending] = useState<boolean>(false);
+    const [isPendingVerify, setIsPendingVerify] = useState<boolean>(false);
 
     const user = useSelector((state: any) => state.user.user as UserTypes);
-    console.log(tipRef);
-    console.log(user);
 
     const HANDLE = {
+        openVerifyModal: () => {
+            dispatch(setVerifyModal(true));
+            tipRef?.current?._tippy?.hide();
+        },
+        verifyAccount: async () => {
+            try {
+            } catch (error: any) {
+                setIsPendingVerify(false);
+                console.error(error);
+            }
+        },
         logout: async () => {
             try {
                 setIsPending(true);
                 const res = await axios.post(
                     `${process.env.SERVER_URL}/auth/logout`,
+                    {},
                     {
                         headers: {
                             authorization: user.tokens.accessToken,
-                            'x-client-id': user.user.id,
+                            'x-client-id': user.user._id,
                         },
                     }
                 );
                 setIsPending(false);
                 console.log(res);
                 await dispatch(logout());
-                toast.success('Logout successfully');
                 tipRef?.current?._tippy?.hide();
             } catch (error: any) {
                 setIsPending(false);
@@ -49,6 +60,18 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
     return (
         <>
             <section className='w-[300px] py-3 px-1'>
+                {!user?.user?.verified && (
+                    <div
+                        className='flex items-center justify-between gap-2 px-2 rounded-lg bg-slate-100 hover:bg-slate-200 hover:cursor-pointer mb-2 py-3'
+                        onClick={HANDLE.openVerifyModal}>
+                        <span className='text-sm font-medium'>
+                            User is not verify, verify now!
+                        </span>
+
+                        <div className=' w-2 h-2 rounded-full flex items-center justify-center bg-colorPrimary'></div>
+                    </div>
+                )}
+
                 <div className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-3'>
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-sharp fa-regular fa-bags-shopping'></i>
@@ -58,15 +81,13 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
 
                 <hr />
 
-                <div className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mt-1'>
+                <div
+                    className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mt-1'
+                    onClick={HANDLE.logout}>
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-solid fa-right-from-bracket'></i>
                     </div>
-                    <span
-                        className=' text-sm font-medium'
-                        onClick={HANDLE.logout}>
-                        Logout
-                    </span>
+                    <span className=' text-sm font-medium'>Logout</span>
                 </div>
 
                 {isPending && (
@@ -79,7 +100,6 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     </div>
                 )}
             </section>
-            <ToastContainer />
         </>
     );
 };

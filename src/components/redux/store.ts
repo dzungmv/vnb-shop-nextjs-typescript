@@ -5,10 +5,12 @@ import createWebStorage from "redux-persist/es/storage/createWebStorage";
 
 
 import userSlice from "./user/userSlice";
+import modalSlice from "./modal/modalSlice";
 
 
 const reducers = combineReducers({
-    user: userSlice
+    user: userSlice,
+    modal: modalSlice
 })
 
 const createNoopStorage = () => {
@@ -25,6 +27,7 @@ createNoopStorage();
 const persistConfig = {
     key: 'root',
     storage: storage,
+    blacklist: ['modal']
 }
 
 const persistedReducer = persistReducer(persistConfig, reducers)

@@ -8,6 +8,9 @@ module.exports = {
                 colorPrimaryHover: '#ca0040',
                 bgGray: 'rgba(22, 24, 35, 0.07)',
             },
+            backgroundColor: {
+                bgModal: 'rgba(255, 255, 255, 0.9)',
+            },
             screens: {
                 mobile: { max: '600px' },
                 onlyTablet: { min: '601px', max: '1023px' },
@@ -31,6 +34,7 @@ module.exports = {
                     'fadeInRight 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
                 bell: 'bell 1s ease-in-out infinite',
                 rotate: 'rotate 1s linear infinite',
+                modal: 'modal 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
             },
             keyframes: {
                 fadeUp: {
@@ -67,6 +71,11 @@ module.exports = {
                 rotate: {
                     '0%': { transform: 'rotate(0deg)' },
                     '100%': { transform: 'rotate(360deg)' },
+                },
+
+                modal: {
+                    '0%': { opacity: 0, transform: 'scale(0.7)' },
+                    '100%': { opacity: 1, transform: 'scale(1)' },
                 },
             },
         },
