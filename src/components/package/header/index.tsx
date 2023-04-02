@@ -6,16 +6,19 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import 'react-toastify/dist/ReactToastify.css';
 import 'tippy.js/dist/tippy.css';
 import 'tippy.js/themes/light.css';
 
 import Modal from '@/components/common/modal';
-import { setVerifyModal } from '@/components/redux/modal/modalSlice';
+import {
+    setChangePasswordModal,
+    setVerifyModal,
+} from '@/components/redux/modal/modalSlice';
 import { UserTypes } from '@/components/types';
 import SearchComp from './search';
 import TippyComp from './tippy';
 import VefifyModal from './verify-modal';
+import ChangePasswordModal from './change-password-modal';
 
 const navs = [
     {
@@ -49,6 +52,9 @@ const Header = () => {
 
     const user = useSelector((state: any) => state.user.user as UserTypes);
     const verifyModal = useSelector((state: any) => state.modal.verify);
+    const changePasswordModal = useSelector(
+        (state: any) => state.modal.changePassword
+    );
 
     const [isShow, setIsShow] = useState<boolean>(false);
     const [searchContainer, setSearchContainer] = useState<boolean>(false);
@@ -70,11 +76,11 @@ const Header = () => {
 
     return (
         <>
-            <header className='bg-white w-ful h-[50px] shadow-md sticky top-0 left-0 right-0 z-[1000] laptop:px-4 tablet:px-4'>
+            <header className='bg-white w-ful h-[50px] shadow-md sticky top-0 left-0 right-0 z-[1000]'>
                 <div className='max-w-[1260px] h-full mx-auto flex items-center justify-between relative'>
                     <div className='flex items-center gap-6 h-full'>
                         <Link href='/'>
-                            <figure className=' w-[50px] h-full'>
+                            <figure className=' w-[50px] h-full laptop:pl-4 tablet:pl-4'>
                                 <Image
                                     className='w-full h-full object-cover'
                                     src={'/icon.png'}
@@ -88,7 +94,7 @@ const Header = () => {
                         </Link>
 
                         <div
-                            className='w-[300px] border rounded-full flex items-center px-3 gap-2 justify-center cursor-pointer tablet:w-10 tablet:h-10 hover:cursor-text'
+                            className='w-[300px] laptop:w-56 border rounded-full flex items-center px-3 gap-2 justify-center cursor-pointer tablet:w-10 tablet:h-10 hover:cursor-text'
                             onClick={() => setSearchContainer(true)}>
                             <i className='fa-regular fa-magnifying-glass text-gray-500 '></i>
                             <div className='w-full py-2 text-sm text-gray-500 tablet:hidden'>
@@ -106,7 +112,7 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-                    <div className=' flex-1 flex items-center justify-end gap-4 h-full'>
+                    <div className=' flex-1 flex items-center justify-end gap-4 h-full mobile:gap-1 tablet:pr-4 laptop:pr-4'>
                         <nav className='flex h-full tablet:hidden'>
                             {navs.map((nav) => {
                                 return (
@@ -264,6 +270,16 @@ const Header = () => {
                     closeOutside
                     close={() => dispatch(setVerifyModal(false))}>
                     <VefifyModal />
+                </Modal>
+            )}
+
+            {changePasswordModal && (
+                <Modal
+                    title='Change password'
+                    open={changePasswordModal}
+                    closeOutside={false}
+                    close={() => dispatch(setChangePasswordModal(false))}>
+                    <ChangePasswordModal />
                 </Modal>
             )}
         </>

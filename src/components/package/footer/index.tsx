@@ -61,27 +61,27 @@ const Footer = () => {
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         Policy
                     </h2>
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Return Policy & Exchange
                     </Link>{' '}
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Warranty Policy
                     </Link>{' '}
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Shipping Policy
                     </Link>
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Term of Use
                     </Link>
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Privacy Policy
                     </Link>
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Franchise policy
                     </Link>
                 </div>
@@ -90,23 +90,23 @@ const Footer = () => {
                     <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
                         Guides
                     </h2>
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Guide to choosing a racquet for beginners
                     </Link>{' '}
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Guide to payment methods
                     </Link>{' '}
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Check warranty status
                     </Link>
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Check order status
                     </Link>
                     <br />
-                    <Link href={'/'} className='text-sm mb-2'>
+                    <Link href={'/'} className='text-sm mb-2 hover:underline'>
                         Shopping guide
                     </Link>
                 </div>

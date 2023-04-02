@@ -1,28 +1,27 @@
 'use client';
 
-import { UserTypes } from '@/components/types';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
-import { useDispatch, useSelector } from 'react-redux';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingCard from '@/components/common/loading-card';
-import { setVerified } from '@/components/redux/user/userSlice';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
 type OtpTypes = {
     title: string;
+    email: string;
 };
 
-const OtpComp: React.FC<OtpTypes> = ({ title }) => {
-    const dispatch = useDispatch();
+const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
     const router = useRouter();
 
-    const user = useSelector((state: any) => state.user.user as UserTypes);
+    const emailFormatted = email.replace(/\%40/g, '@');
 
     const [otp, setOtp] = useState<string>('');
+    const [password, setPassword] = useState<string>('');
+    const [confirmPassword, setConfirmPassword] = useState<string>('');
 
     const [isPendingResend, setIsPendingResend] = useState<boolean>(false);
     const [isPendingVerify, setIsPendingVerify] = useState<boolean>(false);
@@ -35,15 +34,9 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                 setIsPendingResend(true);
 
                 await axios.post(
-                    `${process.env.SERVER_URL}/auth/send-otp`,
+                    `${process.env.SERVER_URL}/auth/forgot-password`,
                     {
-                        email: user?.user?.email,
-                    },
-                    {
-                        headers: {
-                            authorization: user?.tokens?.accessToken,
-                            'x-client-id': user?.user?._id,
-                        },
+                        email: emailFormatted,
                     }
                 );
                 setDisabled(true);
@@ -51,6 +44,7 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                 toast.success('OTP re-send successfully, check your email');
             } catch (error: any) {
                 setIsPendingResend(false);
+                toast.error('User not found!');
                 setDisabled(false);
             }
         },
@@ -58,29 +52,29 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
         verifyOTP: async () => {
             if (otp.length < 6) return toast.error('OTP is invalid');
 
+            if (password.length < 6) {
+                return toast.error('Password must be at least 6 characters');
+            }
+
+            if (password !== confirmPassword) {
+                return toast.error('Password does not match');
+            }
+
             try {
                 setIsPendingVerify(true);
 
                 await axios.post(
-                    `${process.env.SERVER_URL}/auth/verify-account`,
+                    `${process.env.SERVER_URL}/auth/reset-password`,
                     {
+                        email: emailFormatted,
                         otp,
-                        email: user?.user?.email,
-                    },
-                    {
-                        headers: {
-                            authorization: user?.tokens?.accessToken,
-                            'x-client-id': user?.user?._id,
-                        },
+                        password,
                     }
                 );
-                await dispatch(setVerified(true));
                 setIsPendingVerify(false);
-                toast.success('Account verified successfully');
-                router.push('/');
+                router.push('/auth');
             } catch (error) {
                 console.error(error);
-
                 toast.error('OTP is invalid');
                 setIsPendingVerify(false);
             }
@@ -111,12 +105,6 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
         }
     }, [disabled]);
 
-    useEffect(() => {
-        if (!user.user) {
-            redirect('/');
-        }
-    }, [user?.user]);
-
     return (
         <>
             <section className='w-full h-[80vh] flex items-center justify-center mobile:px-4'>
@@ -125,7 +113,7 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                     <p className='mt-3'>
                         We just sent OTP to your email{' '}
                         <span className=' text-colorPrimary font-medium'>
-                            {user?.user?.email}
+                            {emailFormatted}
                         </span>
                     </p>
 
@@ -144,6 +132,24 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                                     className='!w-full border py-2 rounded-md'
                                 />
                             )}
+                        />
+                    </div>
+
+                    <div className='w-[80%] mobile:w-full mx-auto mt-7'>
+                        <input
+                            type='password'
+                            placeholder='New password'
+                            className=' px-2 py-3 w-full border rounded-md text-sm'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+
+                        <input
+                            type='password'
+                            placeholder='New password'
+                            className=' px-2 py-3 w-full border rounded-md text-sm mt-3'
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
 
@@ -203,6 +209,6 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
     );
 };
 
-OtpComp.displayName = 'OtpComp';
+OtpResetPassword.displayName = 'OtpComp';
 
-export default OtpComp;
+export default OtpResetPassword;

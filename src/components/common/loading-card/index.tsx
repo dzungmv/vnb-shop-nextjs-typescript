@@ -17,7 +17,7 @@ const LoadingCard: React.FC<LoadingCardTypes> = ({
                     width: `${width}px`,
                     height: `${height}px`,
                 }}></span>
-            <p className='text-center text-sm flex-1'>{content}</p>
+            <p className='text-sm flex-1'>{content}</p>
         </div>
     );
 };

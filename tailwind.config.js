@@ -9,7 +9,7 @@ module.exports = {
                 bgGray: 'rgba(22, 24, 35, 0.07)',
             },
             backgroundColor: {
-                bgModal: 'rgba(255, 255, 255, 0.9)',
+                bgModal: 'rgba(0, 0, 0, 0.5)',
             },
             screens: {
                 mobile: { max: '600px' },

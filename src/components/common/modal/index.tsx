@@ -51,10 +51,10 @@ const Modal: React.FC<ModalProps> = ({
         <>
             {open && (
                 <section
-                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center  z-[1001] overflow-y-auto mobile:px-2'
+                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-bgModal  z-[1001] overflow-y-auto mobile:px-2'
                     onClick={closeOutside ? handleClickOutside : undefined}>
                     <div
-                        className=' bg-white rounded-lg shadow-xl animate-modal'
+                        className=' bg-white rounded-lg shadow-xl animate-modal mobile:w-full'
                         ref={modalRef}>
                         <div className=' p-2 shadow-sm relative'>
                             <h3 className='text-lg font-medium text-center '>
@@ -66,7 +66,7 @@ const Modal: React.FC<ModalProps> = ({
                                 <i className='fa-solid fa-xmark'></i>
                             </div>
                         </div>
-                        <div className=''>{children}</div>
+                        {children}
                     </div>
                 </section>
             )}

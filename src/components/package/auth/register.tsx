@@ -8,7 +8,6 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/components/redux/user/userSlice';
 
 import LoadingCard from '@/components/common/loading-card';
-import { toast, ToastContainer } from 'react-toastify';
 
 type Props = {
     handleChangeForm: (state: boolean) => void | undefined;
@@ -77,11 +76,6 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                 );
                 setIsPending(false);
                 await dispatch(setUser(res.data.metadata));
-                toast.success('Register success!');
-
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1000);
             } catch (error: any) {
                 setIsPending(false);
                 if (error.response.data.message.includes('Email')) {
@@ -217,7 +211,6 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                     </span>
                 </div>
             </section>
-            <ToastContainer />
         </>
     );
 };

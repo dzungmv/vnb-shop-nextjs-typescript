@@ -5,17 +5,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
 
 import LoadingCard from '@/components/common/loading-card';
-import RegisterForm from './register';
 import { setUser } from '@/components/redux/user/userSlice';
 import { UserTypes } from '@/components/types';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
+import RegisterForm from './register';
 
 const LoginComp: React.FC = () => {
-    const router = useRouter();
-
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.user as UserTypes);
 
@@ -50,14 +47,8 @@ const LoginComp: React.FC = () => {
                 );
                 await dispatch(setUser(res?.data?.metadata));
                 setIsPending(false);
-                toast.success('Login successfully');
-
-                setTimeout(() => {
-                    window.location.href = '/';
-                }, 1000);
             } catch (error: any) {
                 setIsPending(false);
-                console.error(error);
 
                 if (error.response.data.message.includes('User')) {
                     setEmailError(error.response.data.message);
@@ -81,7 +72,7 @@ const LoginComp: React.FC = () => {
 
     useEffect(() => {
         if (user?.tokens?.accessToken) {
-            router.push('/');
+            redirect('/');
         }
     }, [user]);
 
@@ -184,7 +175,6 @@ const LoginComp: React.FC = () => {
                     )}
                 </section>
             </main>
-            <ToastContainer />
         </>
     );
 };

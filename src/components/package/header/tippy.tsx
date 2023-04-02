@@ -1,13 +1,15 @@
 'use client';
 
 import LoadingCard from '@/components/common/loading-card';
-import { setVerifyModal } from '@/components/redux/modal/modalSlice';
+import {
+    setChangePasswordModal,
+    setVerifyModal,
+} from '@/components/redux/modal/modalSlice';
 import { logout } from '@/components/redux/user/userSlice';
 import { UserTypes } from '@/components/types';
 import axios from 'axios';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify';
 
 type TippyCompProps = {
     tipRef: any;
@@ -26,12 +28,9 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
             dispatch(setVerifyModal(true));
             tipRef?.current?._tippy?.hide();
         },
-        verifyAccount: async () => {
-            try {
-            } catch (error: any) {
-                setIsPendingVerify(false);
-                console.error(error);
-            }
+        openChangePasswordModal: () => {
+            dispatch(setChangePasswordModal(true));
+            tipRef?.current?._tippy?.hide();
         },
         logout: async () => {
             try {
@@ -47,7 +46,6 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     }
                 );
                 setIsPending(false);
-                console.log(res);
                 await dispatch(logout());
                 tipRef?.current?._tippy?.hide();
             } catch (error: any) {
@@ -72,11 +70,22 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     </div>
                 )}
 
-                <div className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-3'>
+                <div className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-1'>
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-sharp fa-regular fa-bags-shopping'></i>
                     </div>
                     <span className=' text-sm font-medium'>Ordered</span>
+                </div>
+
+                <div
+                    className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-3'
+                    onClick={HANDLE.openChangePasswordModal}>
+                    <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
+                        <i className='fa-sharp fa-solid fa-key'></i>
+                    </div>
+                    <span className=' text-sm font-medium'>
+                        Change password
+                    </span>
                 </div>
 
                 <hr />

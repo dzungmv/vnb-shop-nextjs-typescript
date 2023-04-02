@@ -1,19 +1,18 @@
 'use client';
 
 import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import LoadingCard from '@/components/common/loading-card';
 import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import { UserTypes } from '@/components/types';
+import { useRouter } from 'next/navigation';
 import { toast, ToastContainer } from 'react-toastify';
 
 const VefifyModal: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
-
     const user = useSelector((state: any) => state.user.user as UserTypes);
 
     const [isPendingSendOTP, setIsPendingSendOTP] = useState<boolean>(false);

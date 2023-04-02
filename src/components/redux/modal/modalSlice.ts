@@ -4,15 +4,21 @@ const modalSlice = createSlice({
     name: 'modal',
     initialState: {
         verify: false,
+        changePassword: false,
     },
     reducers: {
         setVerifyModal: (state, action) => {
             state.verify = action.payload
+        },
+        setChangePasswordModal: (state, action) => {
+            state.changePassword = action.payload;
         }
+
+
 
     }
 })
 
-export const { setVerifyModal } = modalSlice.actions;
+export const { setVerifyModal, setChangePasswordModal } = modalSlice.actions;
 
 export default modalSlice.reducer;
