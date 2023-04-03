@@ -50,10 +50,10 @@ const LoginComp: React.FC = () => {
             } catch (error: any) {
                 setIsPending(false);
 
-                if (error.response.data.message.includes('User')) {
+                if (error?.response?.data?.message?.includes('User')) {
                     setEmailError(error.response.data.message);
                 }
-                if (error.response.data.message.includes('Password')) {
+                if (error?.response?.data?.message?.includes('Password')) {
                     setPasswordError(error.response.data.message);
                 }
             }

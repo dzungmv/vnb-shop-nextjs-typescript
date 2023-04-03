@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@lottiefiles/react-lottie-player": "^3.5.3",
     "@reduxjs/toolkit": "^1.9.3",
     "@tippyjs/react": "^4.2.6",
     "@types/node": "18.15.10",
@@ -24,6 +25,7 @@
     "react-redux": "^8.0.5",
     "react-toastify": "^9.1.2",
     "redux-persist": "^6.0.0",
+    "socket.io-client": "^4.6.1",
     "typescript": "5.0.2"
   },
   "devDependencies": {

@@ -1,6 +1,6 @@
 'use client';
 
-import { FilterItem } from '@/components/types';
+import { FilterItem, ProductType } from '@/components/types';
 import Tippy from '@tippyjs/react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,8 +13,15 @@ import { CatalogItem } from '@/components/types';
 import ProductCard from '@/components/common/product-card';
 import filterUI from '@/components/data/filter.json';
 
-const ProductsPage: React.FC = () => {
+type ProductsPageProps = {
+    products: ProductType[];
+};
+
+const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
     const [isHover, setIsHover] = useState<boolean>(false);
+
+    if (!products) return <div>Loading...</div>;
+
     return (
         <>
             <section className=' max-w-[1260px] mx-auto mt-5 flex gap-5'>
@@ -208,17 +215,17 @@ const ProductsPage: React.FC = () => {
                     </div>
 
                     <div className='flex flex-wrap gap-3 mt-3'>
-                        {[1, 2, 4, 5, 6, 7].map((item: any, index: number) => {
+                        {products.map((item: ProductType, index: number) => {
                             return (
                                 <div
                                     key={index}
                                     className='w-[calc(100%/4-9px)] onlyTablet:w-[calc(100%/3-8px)] mobile:w-full'>
                                     <ProductCard
-                                        id='1'
-                                        name='Vicleo Power 7000'
-                                        slug='vicleo-power-7000'
-                                        price={2000000}
-                                        imageSrc='https://shopvnb.com/uploads/gallery/vot-cau-long-vicleo-power-7000-chinh-hang.jpg'
+                                        id={item._id}
+                                        name={item.name}
+                                        slug={item.slug}
+                                        price={item.price}
+                                        imageSrc={item.image}
                                     />
                                 </div>
                             );

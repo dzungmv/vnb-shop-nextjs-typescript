@@ -112,7 +112,7 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-                    <div className=' flex-1 flex items-center justify-end gap-4 h-full mobile:gap-1 tablet:pr-4 laptop:pr-4'>
+                    <div className=' flex-1 flex items-center justify-end gap-4 h-full mobile:gap-3 tablet:pr-4 laptop:pr-4'>
                         <nav className='flex h-full tablet:hidden'>
                             {navs.map((nav) => {
                                 return (
@@ -158,7 +158,7 @@ const Header = () => {
                                     </div>
                                 </Tippy>
 
-                                <div>
+                                <div className=' mobile:hidden'>
                                     <p>{user.user.name}</p>
                                 </div>
                             </>

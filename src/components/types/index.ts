@@ -36,3 +36,23 @@ export type ProductCard = {
     imageSrc: string;
 
 }
+
+export type ProductType = {
+    _id: string,
+    name: string,
+    slug: string,
+    image: string,
+    type: string,
+    price: number,
+    price_market: number,
+    brand: string,
+    endows: string[],
+    sizes: {
+        size_name: string,
+        quantity: number
+    }[],
+    stores: string[],
+    description: string,
+    createdAt: string,
+    updatedAt: string
+}
