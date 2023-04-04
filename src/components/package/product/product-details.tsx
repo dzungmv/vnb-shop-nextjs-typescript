@@ -3,31 +3,32 @@
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { io } from 'socket.io-client';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ProductType, UserTypes } from '@/components/types';
+import { setVerifyModal } from '@/components/redux/modal/modalSlice';
+import axios from 'axios';
+import LoadingCard from '@/components/common/loading-card';
+import { setCart } from '@/components/redux/user/userSlice';
 
 type Props = {
     product: ProductType;
+    product_size: {
+        size_name: string;
+        quantity: number;
+    };
 };
-
-let socket;
 
 const ProductDetails: React.FC<Props> = ({ product }) => {
     const router = useRouter();
+    const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.user as UserTypes);
 
-    useEffect(() => {
-        socketInitializer();
-    }, []);
-
-    const socketInitializer = async () => {
-        socket = io(`${process.env.SERVER_URL}`);
-    };
-
-    const [quantity, setQuantity] = useState<number>(1);
     const [size, setSize] = useState<string>('');
+    const [quantity, setQuantity] = useState<number>(1);
+
+    const [error, setError] = useState<string>('');
+    const [isPending, setIsPending] = useState<boolean>(false);
 
     const HANDLE = {
         increaseQuantity: (): void => {
@@ -36,14 +37,65 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         decreaseQuantity: (): void => {
             setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
         },
-        addtoCart: (): void => {
-            console.log('add to cart');
 
-            // if (!user?.user?._id) {
-            //     router.push('/auth');
-            // }
+        addtoCart: async () => {
+            if (!user?.user?._id) {
+                router.push('/auth');
+            }
+
+            if (!user?.user?.verified) {
+                dispatch(setVerifyModal(true));
+            }
+
+            if (!size) {
+                setError('Please choose size');
+                return;
+            }
+
+            const data = {
+                productId: product._id,
+                product_name: product.name,
+                product_price: product.price,
+                product_image: product.image,
+                product_size: {
+                    size_name: size,
+                    quantity: quantity,
+                },
+            };
+
+            try {
+                setIsPending(true);
+                const res = await axios.post(
+                    `${process.env.SERVER_URL}/user/add-cart`,
+                    {
+                        product: data,
+                    },
+                    {
+                        headers: {
+                            authorization: user?.tokens?.accessToken,
+                            'x-client-id': user?.user?._id,
+                        },
+                    }
+                );
+
+                setIsPending(false);
+                console.log(res);
+                dispatch(setCart(res?.data?.data?.products));
+            } catch (error) {
+                console.log(error);
+                setIsPending(false);
+                setError('Something went wrong');
+            }
         },
     };
+
+    useEffect(() => {
+        setQuantity(1);
+        if (size) {
+            setError('');
+        }
+    }, [size]);
+
     return (
         <section className=' max-w-[1260px] mx-auto mt-8'>
             <div className='flex gap-7 items-start flex-wrap mb-8'>
@@ -138,33 +190,37 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                             </div>
 
                             <div className=' flex items-center gap-5 mt-4'>
-                                <div className='flex items-center gap-1'>
-                                    <button
-                                        className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
-                                        onClick={HANDLE.decreaseQuantity}
-                                        disabled={quantity <= 1}>
-                                        <i className='fa-solid fa-minus text-sm text-white'></i>
-                                    </button>
-                                    <input
-                                        className=' text-center border border-colorPrimary w-[90px] py-1 rounded-md'
-                                        type='number'
-                                        value={quantity}
-                                        onChange={(e) =>
-                                            setQuantity(Number(e.target.value))
-                                        }
-                                    />
-                                    <button
-                                        className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
-                                        onClick={HANDLE.increaseQuantity}
-                                        disabled={
-                                            product.sizes.find(
-                                                (item) =>
-                                                    item.size_name === size
-                                            )?.quantity === quantity
-                                        }>
-                                        <i className='fa-solid fa-plus text-white'></i>
-                                    </button>
-                                </div>
+                                {size && size.length > 0 && (
+                                    <div className='flex items-center gap-1'>
+                                        <button
+                                            className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
+                                            onClick={HANDLE.decreaseQuantity}
+                                            disabled={quantity <= 1}>
+                                            <i className='fa-solid fa-minus text-sm text-white'></i>
+                                        </button>
+                                        <input
+                                            className=' text-center border border-colorPrimary w-[90px] py-1 rounded-md'
+                                            type='number'
+                                            value={quantity}
+                                            onChange={(e) =>
+                                                setQuantity(
+                                                    Number(e.target.value)
+                                                )
+                                            }
+                                        />
+                                        <button
+                                            className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
+                                            onClick={HANDLE.increaseQuantity}
+                                            disabled={
+                                                product.sizes.find(
+                                                    (item) =>
+                                                        item.size_name === size
+                                                )?.quantity === quantity
+                                            }>
+                                            <i className='fa-solid fa-plus text-white'></i>
+                                        </button>
+                                    </div>
+                                )}
 
                                 <button
                                     className=' py-2 px-3 text-sm font-medium rounded-md text-colorPrimary border border-colorPrimary hover:bg-colorPrimary hover:text-white'
@@ -173,6 +229,22 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                                     <span> Add to cart</span>
                                 </button>
                             </div>
+
+                            {error && (
+                                <p className='mt-4 font-medium text-colorPrimary text-sm'>
+                                    {error}
+                                </p>
+                            )}
+
+                            {isPending && (
+                                <div className='mt-4'>
+                                    <LoadingCard
+                                        width='26'
+                                        height='26'
+                                        content='Add to card...'
+                                    />
+                                </div>
+                            )}
                         </div>
                     </div>
 

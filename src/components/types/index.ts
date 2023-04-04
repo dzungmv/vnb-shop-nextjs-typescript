@@ -56,3 +56,14 @@ export type ProductType = {
     createdAt: string,
     updatedAt: string
 }
+
+export type CartType = {
+    productId: string,
+    product_name: string,
+    product_image: string,
+    product_price: number,
+    product_size: {
+        size_name: string,
+        quantity: number
+    }
+}

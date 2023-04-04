@@ -14,11 +14,13 @@ import {
     setChangePasswordModal,
     setVerifyModal,
 } from '@/components/redux/modal/modalSlice';
-import { UserTypes } from '@/components/types';
+import { CartType, UserTypes } from '@/components/types';
 import SearchComp from './search';
 import TippyComp from './tippy';
 import VefifyModal from './verify-modal';
 import ChangePasswordModal from './change-password-modal';
+import axios from 'axios';
+import { setCart } from '@/components/redux/user/userSlice';
 
 const navs = [
     {
@@ -51,6 +53,8 @@ const Header = () => {
     const tippyRef = useRef(null);
 
     const user = useSelector((state: any) => state.user.user as UserTypes);
+    const cart = useSelector((state: any) => state.user.cart as CartType[]);
+
     const verifyModal = useSelector((state: any) => state.modal.verify);
     const changePasswordModal = useSelector(
         (state: any) => state.modal.changePassword
@@ -73,6 +77,25 @@ const Header = () => {
             document.removeEventListener('click', handleClickOutside);
         };
     }, [searchContainer]);
+
+    useEffect(() => {
+        (async () => {
+            if (!user.user?._id) {
+                return;
+            }
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/user/get-cart`,
+                {
+                    headers: {
+                        authorization: user?.tokens?.accessToken,
+                        'x-client-id': user?.user?._id,
+                    },
+                }
+            );
+
+            dispatch(setCart(res?.data?.data?.products));
+        })();
+    }, [cart]);
 
     return (
         <>
@@ -132,9 +155,18 @@ const Header = () => {
 
                         {user?.tokens?.accessToken ? (
                             <>
-                                <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 transition-all ease-in duration-[0.3s]'>
-                                    <i className='fa-solid fa-cart-shopping group-hover:text-colorPrimary'></i>
-                                </div>
+                                <Link href={'/cart'} passHref>
+                                    <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 transition-all ease-in duration-[0.3s] relative'>
+                                        <i className='fa-solid fa-cart-shopping group-hover:text-colorPrimary'></i>
+                                        {cart && cart.length > 0 && (
+                                            <div className=' absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
+                                                <span className='text-xs text-white'>
+                                                    {cart?.length}
+                                                </span>
+                                            </div>
+                                        )}
+                                    </div>
+                                </Link>
                                 <Tippy
                                     ref={tippyRef}
                                     content={<TippyComp tipRef={tippyRef} />}
