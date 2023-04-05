@@ -58,6 +58,7 @@ export type ProductType = {
 }
 
 export type CartType = {
+    _id: string,
     productId: string,
     product_name: string,
     product_image: string,

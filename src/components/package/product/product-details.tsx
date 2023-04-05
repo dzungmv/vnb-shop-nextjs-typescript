@@ -79,7 +79,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                 );
 
                 setIsPending(false);
-                console.log(res);
+                console.log('Log in add to cart: ', res?.data?.data?.products);
                 dispatch(setCart(res?.data?.data?.products));
             } catch (error) {
                 console.log(error);
