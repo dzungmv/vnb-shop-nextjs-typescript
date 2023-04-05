@@ -2,7 +2,8 @@
 
 import LoadingCard from '@/components/common/loading-card';
 import { setCart } from '@/components/redux/user/userSlice';
-import { CartType } from '@/components/types';
+import { CartType, UserTypes } from '@/components/types';
+import axios from 'axios';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -12,6 +13,7 @@ const CartPage: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const cartStore: CartType[] = useSelector((state: any) => state.user.cart);
+    const user: UserTypes = useSelector((state: any) => state.user.user);
 
     const [cart, setCart] = useState<CartType[]>(cartStore);
     const [error, setError] = useState<string>('');
@@ -68,6 +70,27 @@ const CartPage: React.FC = () => {
 
                 return [...oldProducts];
             });
+        },
+        checkout: async () => {
+            try {
+                setIsPending(true);
+                await axios.post(
+                    `${process.env.SERVER_URL}/user/checkout`,
+                    {
+                        cart,
+                    },
+                    {
+                        headers: {
+                            authorization: user.tokens.accessToken,
+                            'x-client-id': user.user._id,
+                        },
+                    }
+                );
+                setIsPending(false);
+            } catch (error) {
+                console.log(error);
+                setIsPending(false);
+            }
         },
     };
 
@@ -224,7 +247,10 @@ const CartPage: React.FC = () => {
                             <p>
                                 {cart
                                     ?.reduce(
-                                        (acc, item) => acc + item.product_price,
+                                        (acc, item) =>
+                                            acc +
+                                            item.product_size.quantity *
+                                                item.product_price,
                                         0
                                     )
                                     .toLocaleString()}
@@ -233,15 +259,19 @@ const CartPage: React.FC = () => {
                         </div>
 
                         <div className='mt-10'>
-                            <div className='mb-3'>
-                                <LoadingCard
-                                    width='25'
-                                    height='25'
-                                    content='Checkout in processing...'
-                                />
-                            </div>
+                            {isPending && (
+                                <div className='mb-3'>
+                                    <LoadingCard
+                                        width='25'
+                                        height='25'
+                                        content='Checkout in processing...'
+                                    />
+                                </div>
+                            )}
 
-                            <button className='py-3 w-full bg-colorPrimary text-white font-medium text-sm hover:bg-colorPrimaryHover rounded-md'>
+                            <button
+                                className='py-3 w-full bg-colorPrimary text-white font-medium text-sm hover:bg-colorPrimaryHover rounded-md'
+                                onClick={HANDLE.checkout}>
                                 Check out
                             </button>
                         </div>

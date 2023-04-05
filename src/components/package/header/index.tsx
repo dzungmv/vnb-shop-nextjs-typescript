@@ -94,8 +94,6 @@ const Header = () => {
             );
 
             dispatch(setCart(res?.data?.data?.products));
-
-            console.log('cart header', res?.data?.data?.products);
         })();
     }, []);
 
