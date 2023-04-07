@@ -47,10 +47,7 @@ export type ProductType = {
     price_market: number,
     brand: string,
     endows: string[],
-    sizes: {
-        size_name: string,
-        quantity: number
-    }[],
+    quantity: number,
     stores: string[],
     description: string,
     createdAt: string,
@@ -63,8 +60,5 @@ export type CartType = {
     product_name: string,
     product_image: string,
     product_price: number,
-    product_size: {
-        size_name: string,
-        quantity: number
-    }
+    product_quantity: number,
 }

@@ -9,7 +9,10 @@ export const metadata: Metadata = {
 
 export default async function Page() {
     const res = await fetch(
-        `${process.env.SERVER_URL}/product/get-all-product`
+        `${process.env.SERVER_URL}/product/get-all-product`,
+        {
+            cache: 'no-cache',
+        }
     );
     const parseJSON = await res.json();
     const products = parseJSON.data as ProductType[];

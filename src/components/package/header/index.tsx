@@ -52,8 +52,10 @@ const Header = () => {
 
     const tippyRef = useRef(null);
 
-    const user = useSelector((state: any) => state.user.user as UserTypes);
-    const cart = useSelector((state: any) => state.user.cart as CartType[]);
+    const user: UserTypes = useSelector((state: any) => state.user.user);
+    const cart: CartType[] = useSelector((state: any) => state.user.cart);
+
+    console.log('Cart header', cart);
 
     const verifyModal = useSelector((state: any) => state.modal.verify);
     const changePasswordModal = useSelector(
@@ -83,6 +85,11 @@ const Header = () => {
             if (!user.user?._id) {
                 return;
             }
+
+            if (cart) {
+                return;
+            }
+
             const res = await axios.get(
                 `${process.env.SERVER_URL}/user/get-cart`,
                 {

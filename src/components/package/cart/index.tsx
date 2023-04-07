@@ -1,7 +1,6 @@
 'use client';
 
 import LoadingCard from '@/components/common/loading-card';
-import { setCart } from '@/components/redux/user/userSlice';
 import { CartType, UserTypes } from '@/components/types';
 import axios from 'axios';
 import Image from 'next/image';
@@ -9,15 +8,28 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+type ErrorResponseProps = {
+    _id: string;
+    name: string;
+    quantity: number;
+};
+
 const CartPage: React.FC = () => {
     const dispatch = useDispatch();
     const router = useRouter();
     const cartStore: CartType[] = useSelector((state: any) => state.user.cart);
+
+    // console.log('Cart Store', cartStore);
+
     const user: UserTypes = useSelector((state: any) => state.user.user);
 
     const [cart, setCart] = useState<CartType[]>(cartStore);
-    const [error, setError] = useState<string>('');
+    const [errorOutStock, setErrorOutStock] = useState<ErrorResponseProps[]>(
+        []
+    );
     const [isPending, setIsPending] = useState<boolean>(false);
+
+    console.log('Error', errorOutStock);
 
     const HANDLE = {
         increasingQuantity: (_id: string) => {
@@ -27,8 +39,12 @@ const CartPage: React.FC = () => {
 
             if (productIndex !== -1) {
                 setCart((oldProducts: CartType[]) => {
-                    oldProducts[productIndex].product_size.quantity += 1;
-                    return [...oldProducts];
+                    const copy = JSON.stringify(oldProducts);
+                    const data = JSON.parse(copy);
+
+                    data[productIndex].product_quantity += 1;
+
+                    return data;
                 });
             }
         },
@@ -39,7 +55,7 @@ const CartPage: React.FC = () => {
 
             if (productIndex !== -1) {
                 setCart((oldProducts: CartType[]) => {
-                    oldProducts[productIndex].product_size.quantity -= 1;
+                    oldProducts[productIndex].product_quantity -= 1;
                     return [...oldProducts];
                 });
             }
@@ -51,7 +67,7 @@ const CartPage: React.FC = () => {
                 });
 
                 if (productIndex !== -1) {
-                    oldProducts[productIndex].product_size.quantity =
+                    oldProducts[productIndex].product_quantity =
                         Number(quantity);
                 }
 
@@ -87,12 +103,20 @@ const CartPage: React.FC = () => {
                     }
                 );
                 setIsPending(false);
-            } catch (error) {
+            } catch (error: any) {
                 console.log(error);
                 setIsPending(false);
+
+                if (error?.response?.data?.type === 'out_of_stock') {
+                    setErrorOutStock(error?.response?.data?.stock);
+                }
             }
         },
     };
+
+    useEffect(() => {
+        // setError('');
+    }, [cart]);
 
     return (
         <section className=' max-w-[1260px] mx-auto mt-9'>
@@ -127,17 +151,6 @@ const CartPage: React.FC = () => {
 
                                             <div className='flex items-center gap-10'>
                                                 <div className='flex items-center gap-3'>
-                                                    <div>
-                                                        Size:{' '}
-                                                        <span>
-                                                            {
-                                                                item
-                                                                    .product_size
-                                                                    .size_name
-                                                            }
-                                                        </span>
-                                                    </div>
-
                                                     <div className='flex items-center gap-1'>
                                                         <button
                                                             className='w-[20px] h-[20px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
@@ -147,9 +160,7 @@ const CartPage: React.FC = () => {
                                                                 )
                                                             }
                                                             disabled={
-                                                                item
-                                                                    .product_size
-                                                                    .quantity <=
+                                                                item.product_quantity <
                                                                 1
                                                             }>
                                                             <i className='fa-solid fa-minus text-sm text-white'></i>
@@ -158,9 +169,7 @@ const CartPage: React.FC = () => {
                                                             className=' text-center border border-colorPrimary w-[70px] py-1 text-sm rounded-md'
                                                             type='number'
                                                             value={
-                                                                item
-                                                                    .product_size
-                                                                    .quantity
+                                                                item.product_quantity
                                                             }
                                                             onChange={(e) => {
                                                                 HANDLE.setQuantity(
@@ -198,6 +207,30 @@ const CartPage: React.FC = () => {
                                                 </div>
                                             </div>
                                         </div>
+                                        {errorOutStock &&
+                                            errorOutStock.length > 0 &&
+                                            errorOutStock.map(
+                                                (
+                                                    error: ErrorResponseProps,
+                                                    index: number
+                                                ) => {
+                                                    if (
+                                                        error._id ===
+                                                        item.productId
+                                                    ) {
+                                                        return (
+                                                            <div
+                                                                key={index}
+                                                                className='text-red-500'>
+                                                                {
+                                                                    item.product_name
+                                                                }{' '}
+                                                                is out of stock
+                                                            </div>
+                                                        );
+                                                    }
+                                                }
+                                            )}
                                         <hr />
                                     </div>
                                 );
@@ -249,7 +282,7 @@ const CartPage: React.FC = () => {
                                     ?.reduce(
                                         (acc, item) =>
                                             acc +
-                                            item.product_size.quantity *
+                                            item.product_quantity *
                                                 item.product_price,
                                         0
                                     )

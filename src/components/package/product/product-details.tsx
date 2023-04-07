@@ -13,10 +13,6 @@ import { setCart } from '@/components/redux/user/userSlice';
 
 type Props = {
     product: ProductType;
-    product_size: {
-        size_name: string;
-        quantity: number;
-    };
 };
 
 const ProductDetails: React.FC<Props> = ({ product }) => {
@@ -24,7 +20,6 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     const dispatch = useDispatch();
     const user = useSelector((state: any) => state.user.user as UserTypes);
 
-    const [size, setSize] = useState<string>('');
     const [quantity, setQuantity] = useState<number>(1);
 
     const [error, setError] = useState<string>('');
@@ -47,20 +42,12 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                 dispatch(setVerifyModal(true));
             }
 
-            if (!size) {
-                setError('Please choose size');
-                return;
-            }
-
             const data = {
                 productId: product._id,
                 product_name: product.name,
                 product_price: product.price,
                 product_image: product.image,
-                product_size: {
-                    size_name: size,
-                    quantity: quantity,
-                },
+                product_quantity: quantity,
             };
 
             try {
@@ -88,13 +75,6 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
             }
         },
     };
-
-    useEffect(() => {
-        setQuantity(1);
-        if (size) {
-            setError('');
-        }
-    }, [size]);
 
     return (
         <section className=' max-w-[1260px] mx-auto mt-8'>
@@ -166,61 +146,37 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                                 </div>
                             </div>
 
-                            <div className='mt-5 flex items-center gap-3 '>
-                                <p className=' text-sm'>Choose size: </p>
-                                <div className='flex items-center gap-2'>
-                                    {product.sizes.map((item, index) => {
-                                        return (
-                                            <button
-                                                key={index}
-                                                className={
-                                                    item.size_name === size
-                                                        ? 'border rounded-md px-3 py-1 text-sm bg-colorPrimary text-white disabled:bg-gray-300 disabled:text-gray-500'
-                                                        : 'border rounded-md px-3 py-1 text-sm disabled:bg-gray-300 disabled:text-gray-500'
-                                                }
-                                                disabled={item.quantity === 0}
-                                                onClick={() =>
-                                                    setSize(item.size_name)
-                                                }>
-                                                {item.size_name}
-                                            </button>
-                                        );
-                                    })}
-                                </div>
-                            </div>
-
                             <div className=' flex items-center gap-5 mt-4'>
-                                {size && size.length > 0 && (
-                                    <div className='flex items-center gap-1'>
-                                        <button
-                                            className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
-                                            onClick={HANDLE.decreaseQuantity}
-                                            disabled={quantity <= 1}>
-                                            <i className='fa-solid fa-minus text-sm text-white'></i>
-                                        </button>
-                                        <input
-                                            className=' text-center border border-colorPrimary w-[90px] py-1 rounded-md'
-                                            type='number'
-                                            value={quantity}
-                                            onChange={(e) =>
-                                                setQuantity(
-                                                    Number(e.target.value)
-                                                )
+                                <div className='flex items-center gap-1'>
+                                    <button
+                                        className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
+                                        onClick={HANDLE.decreaseQuantity}
+                                        disabled={quantity <= 1}>
+                                        <i className='fa-solid fa-minus text-sm text-white'></i>
+                                    </button>
+                                    <input
+                                        className=' text-center border border-colorPrimary w-[90px] py-1 rounded-md'
+                                        type='number'
+                                        value={quantity}
+                                        onChange={(e) => {
+                                            if (
+                                                Number(e.target.value) >
+                                                product.quantity
+                                            ) {
+                                                setQuantity(product.quantity);
                                             }
-                                        />
-                                        <button
-                                            className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
-                                            onClick={HANDLE.increaseQuantity}
-                                            disabled={
-                                                product.sizes.find(
-                                                    (item) =>
-                                                        item.size_name === size
-                                                )?.quantity === quantity
-                                            }>
-                                            <i className='fa-solid fa-plus text-white'></i>
-                                        </button>
-                                    </div>
-                                )}
+                                            setQuantity(Number(e.target.value));
+                                        }}
+                                    />
+                                    <button
+                                        className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
+                                        onClick={HANDLE.increaseQuantity}
+                                        disabled={
+                                            product.quantity === quantity
+                                        }>
+                                        <i className='fa-solid fa-plus text-white'></i>
+                                    </button>
+                                </div>
 
                                 <button
                                     className=' py-2 px-3 text-sm font-medium rounded-md text-colorPrimary border border-colorPrimary hover:bg-colorPrimary hover:text-white'
