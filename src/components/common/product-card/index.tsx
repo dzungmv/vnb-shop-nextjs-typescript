@@ -7,23 +7,26 @@ const ProductCard: React.FC<ProductCard> = (props) => {
 
     return (
         <Link href={`/product/${slug}`} passHref>
-            <article className='group hover:cursor-pointer rounded-lg border border-transparent hover:border-gray-200 transition-all duration-200'>
-                <figure className='w-full'>
-                    <Image
-                        className='w-full h-full object-cover rounded-t-lg group-hover:opacity-[0.7] transition-all duration-200'
-                        src={imageSrc}
-                        alt='Product Card'
-                        width='0'
-                        height='0'
-                        sizes='100vw'
-                    />
-                </figure>
-                <div className='mt-4 p-2'>
-                    <p className='text-center group-hover:text-colorPrimary transition-all duration-200'>
+            <article className='group hover:cursor-pointer rounded-lg border border-transparent hover:border-gray-200 transition-all duration-200 flex flex-col justify-between items-center h-[300px]'>
+                <div className='h-[70%]'>
+                    <figure className='w-full h-full'>
+                        <Image
+                            className='w-full h-full object-contain rounded-t-lg group-hover:opacity-[0.7] transition-all duration-200'
+                            src={imageSrc}
+                            alt='Product Card'
+                            width='0'
+                            height='0'
+                            sizes='100vw'
+                        />
+                    </figure>
+
+                    <div className='text-center group-hover:text-colorPrimary transition-all duration-200 mt-2 px-1'>
                         {name}
-                    </p>
-                    <p className='text-center mt-1 text-colorPrimary font-medium'>{`${price.toLocaleString()}₫`}</p>
+                    </div>
                 </div>
+                <p className='text-center group-hover:text-colorPrimary transition-all duration-200 px-1 pb-1 font-medium text-colorPrimary'>
+                    {price.toLocaleString()}₫
+                </p>
             </article>
         </Link>
     );

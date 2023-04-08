@@ -20,11 +20,15 @@ const userSlice = createSlice({
         setCart: (state, action) => {
             state.cart = action.payload
         },
+        removeCart: (state) => {
+            state.cart = [] as CartType[]
+        },
         logout: (state) => {
             state.user = {} as UserTypes
+            state.cart = [] as CartType[]
         }
     }
 })
 
-export const { setUser, setVerified, setCart, logout } = userSlice.actions;
+export const { setUser, setVerified, setCart, removeCart, logout } = userSlice.actions;
 export default userSlice.reducer;

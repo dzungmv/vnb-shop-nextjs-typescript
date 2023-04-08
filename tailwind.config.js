@@ -35,6 +35,8 @@ module.exports = {
                 bell: 'bell 1s ease-in-out infinite',
                 rotate: 'rotate 1s linear infinite',
                 modal: 'modal 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+                fadeInTop:
+                    'fadeInTop 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
             },
             keyframes: {
                 fadeUp: {
@@ -61,6 +63,10 @@ module.exports = {
                 fadeInRight: {
                     '0%': { opacity: 0, transform: 'translateX(100%)' },
                     '100%': { opacity: 1, transform: 'translateX(0)' },
+                },
+                fadeInTop: {
+                    '0%': { opacity: 0, transform: 'translateY(-100%)' },
+                    '100%': { opacity: 1, transform: 'translateY(0)' },
                 },
                 bell: {
                     '0%': { transform: 'scale(1)' },

@@ -2,14 +2,14 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
-import { ProductType, UserTypes } from '@/components/types';
-import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import axios from 'axios';
+
 import LoadingCard from '@/components/common/loading-card';
+import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import { setCart } from '@/components/redux/user/userSlice';
+import { ProductType, UserTypes } from '@/components/types';
 
 type Props = {
     product: ProductType;

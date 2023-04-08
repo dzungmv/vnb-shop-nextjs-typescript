@@ -55,8 +55,6 @@ const Header = () => {
     const user: UserTypes = useSelector((state: any) => state.user.user);
     const cart: CartType[] = useSelector((state: any) => state.user.cart);
 
-    console.log('Cart header', cart);
-
     const verifyModal = useSelector((state: any) => state.modal.verify);
     const changePasswordModal = useSelector(
         (state: any) => state.modal.changePassword
