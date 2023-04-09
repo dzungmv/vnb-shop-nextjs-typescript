@@ -8,6 +8,7 @@ import {
 import { logout } from '@/components/redux/user/userSlice';
 import { UserTypes } from '@/components/types';
 import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -16,6 +17,7 @@ type TippyCompProps = {
 };
 
 const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
+    const router = useRouter();
     const dispatch = useDispatch();
 
     const [isPending, setIsPending] = useState<boolean>(false);
@@ -26,6 +28,10 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
     const HANDLE = {
         openVerifyModal: () => {
             dispatch(setVerifyModal(true));
+            tipRef?.current?._tippy?.hide();
+        },
+        gotoOrderPage: () => {
+            router.push('/order');
             tipRef?.current?._tippy?.hide();
         },
         openChangePasswordModal: () => {
@@ -50,6 +56,9 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                 tipRef?.current?._tippy?.hide();
             } catch (error: any) {
                 setIsPending(false);
+                if (error?.response?.status === 401) {
+                    dispatch(logout());
+                }
                 console.error(error);
             }
         },
@@ -70,7 +79,9 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     </div>
                 )}
 
-                <div className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-1'>
+                <div
+                    className='flex items-center gap-2 px-2 py-1 rounded-lg hover:bg-slate-100 hover:cursor-pointer mb-1'
+                    onClick={HANDLE.gotoOrderPage}>
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-sharp fa-regular fa-bags-shopping'></i>
                     </div>

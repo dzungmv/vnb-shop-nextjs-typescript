@@ -5,6 +5,7 @@ import axios from 'axios';
 import LoadingCard from '@/components/common/loading-card';
 import { setChangePasswordModal } from '@/components/redux/modal/modalSlice';
 import { UserTypes } from '@/components/types';
+import swal from 'sweetalert';
 
 const ChangePasswordModal: React.FC = () => {
     const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const ChangePasswordModal: React.FC = () => {
         }
         try {
             setIsPending(true);
-            const res = await axios.post(
+            await axios.post(
                 `${process.env.SERVER_URL}/auth/change-password`,
                 {
                     password,
@@ -52,6 +53,11 @@ const ChangePasswordModal: React.FC = () => {
 
             setIsPending(false);
             dispatch(setChangePasswordModal(false));
+            swal({
+                title: 'Success',
+                icon: 'success',
+                text: 'Password has been changed!',
+            });
         } catch (error) {
             setConfirmPasswordError('Some thing went wrong, try again later!');
             setIsPending(false);

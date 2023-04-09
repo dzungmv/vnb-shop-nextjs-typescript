@@ -14,6 +14,7 @@ export default async function Page() {
             cache: 'no-cache',
         }
     );
+
     const parseJSON = await res.json();
     const products = parseJSON.data as ProductType[];
 

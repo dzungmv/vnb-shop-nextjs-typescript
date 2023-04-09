@@ -8,7 +8,6 @@ import LoadingCard from '@/components/common/loading-card';
 import { setVerifyModal } from '@/components/redux/modal/modalSlice';
 import { UserTypes } from '@/components/types';
 import { useRouter } from 'next/navigation';
-import { toast, ToastContainer } from 'react-toastify';
 
 const VefifyModal: React.FC = () => {
     const dispatch = useDispatch();
@@ -37,7 +36,6 @@ const VefifyModal: React.FC = () => {
             dispatch(setVerifyModal(false));
             router.push('/verify-account');
         } catch (error) {
-            toast.error('Something went wrong!');
             setIsPendingSendOTP(false);
         }
     };
@@ -69,7 +67,6 @@ const VefifyModal: React.FC = () => {
                     </button>
                 </div>
             </div>
-            <ToastContainer />
         </>
     );
 };

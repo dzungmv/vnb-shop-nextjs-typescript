@@ -8,6 +8,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '@/components/redux/user/userSlice';
 
 import LoadingCard from '@/components/common/loading-card';
+import swal from 'sweetalert';
 
 type Props = {
     handleChangeForm: (state: boolean) => void | undefined;
@@ -76,6 +77,10 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                 );
                 setIsPending(false);
                 await dispatch(setUser(res.data.metadata));
+                swal({
+                    title: 'Register success',
+                    icon: 'success',
+                });
             } catch (error: any) {
                 setIsPending(false);
                 if (error.response.data.message.includes('Email')) {

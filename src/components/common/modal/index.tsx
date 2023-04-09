@@ -51,7 +51,7 @@ const Modal: React.FC<ModalProps> = ({
         <>
             {open && (
                 <section
-                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center bg-bgModal  z-[1001] overflow-y-auto mobile:px-2'
+                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center backdrop-blur-[5px]  z-[1001] overflow-y-auto mobile:px-2'
                     onClick={closeOutside ? handleClickOutside : undefined}>
                     <div
                         className=' bg-white rounded-lg shadow-xl animate-modal mobile:w-full'

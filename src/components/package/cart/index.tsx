@@ -123,6 +123,7 @@ const CartPage: React.FC = () => {
                 setIsPending(false);
                 // console.log(res.data);
                 setSuccess(true);
+                window.scrollTo(0, 0);
             } catch (error: any) {
                 console.log(error);
                 setIsPending(false);
@@ -146,11 +147,11 @@ const CartPage: React.FC = () => {
                     phone,
                     address,
                     payment,
-                    cart,
+                    products: cart,
                     total,
                 };
                 setIsPendingOrder(true);
-                const res = await axios.post(
+                await axios.post(
                     `${process.env.SERVER_URL}/user/order`,
                     { data },
                     {
@@ -162,11 +163,12 @@ const CartPage: React.FC = () => {
                 );
                 dispatch(removeCart());
                 setIsPendingOrder(false);
-                console.log(res.data);
                 swal({
                     title: 'Success',
-                    text: 'Order successfully',
+                    text: 'Order successfully!',
                     icon: 'success',
+                }).then(() => {
+                    router.push('/order');
                 });
             } catch (error) {
                 console.log(error);
@@ -178,6 +180,22 @@ const CartPage: React.FC = () => {
     useEffect(() => {
         setErrorOutStock([]);
     }, [cart]);
+
+    useEffect(() => {
+        if (!user?.user?._id) {
+            router.push('/');
+        }
+    }, [user?.user?._id]);
+
+    useEffect(() => {
+        if (success) {
+            // scroll to top smoothly
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth',
+            });
+        }
+    }, [success]);
 
     return (
         <>
@@ -301,7 +319,7 @@ const CartPage: React.FC = () => {
                                         <div key={index}>
                                             <div className='mb-1 flex items-center justify-between'>
                                                 <div className='flex gap-1 items-center'>
-                                                    <figure className='w-[50px]'>
+                                                    <figure className='w-[50px] relative'>
                                                         <Image
                                                             className='w-full h-full object-contain'
                                                             src={
@@ -312,6 +330,11 @@ const CartPage: React.FC = () => {
                                                             sizes='100vw'
                                                             height='0'
                                                         />
+                                                        <span className='w-[15px] h-[15px] flex items-center justify-center bg-colorPrimary text-white text-xs rounded-full absolute top-0 right-0'>
+                                                            {
+                                                                item.product_quantity
+                                                            }
+                                                        </span>
                                                     </figure>
 
                                                     <p className='text-sm flex-1'>

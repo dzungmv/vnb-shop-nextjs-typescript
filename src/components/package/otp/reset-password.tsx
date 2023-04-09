@@ -3,11 +3,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingCard from '@/components/common/loading-card';
 import { useRouter } from 'next/navigation';
+import swal from 'sweetalert';
 
 type OtpTypes = {
     title: string;
@@ -41,23 +40,44 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                 );
                 setDisabled(true);
                 setIsPendingResend(false);
-                toast.success('OTP re-send successfully, check your email');
+                swal({
+                    title: 'Success',
+                    icon: 'success',
+                    text: 'OTP has been sent to your email!',
+                });
             } catch (error: any) {
                 setIsPendingResend(false);
-                toast.error('User not found!');
+                swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'User not found!',
+                });
                 setDisabled(false);
             }
         },
 
         verifyOTP: async () => {
-            if (otp.length < 6) return toast.error('OTP is invalid');
+            if (otp.length < 6)
+                return swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'OTP must be 6 digits',
+                });
 
             if (password.length < 6) {
-                return toast.error('Password must be at least 6 characters');
+                return swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'Password must be at least 6 characters',
+                });
             }
 
             if (password !== confirmPassword) {
-                return toast.error('Password does not match');
+                return swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'Password not match!',
+                });
             }
 
             try {
@@ -75,7 +95,11 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                 router.push('/auth');
             } catch (error) {
                 console.error(error);
-                toast.error('OTP is invalid');
+                swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'OTP not valid!',
+                });
                 setIsPendingVerify(false);
             }
         },
@@ -204,7 +228,6 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                     </div>
                 </div>
             </section>
-            <ToastContainer />
         </>
     );
 };

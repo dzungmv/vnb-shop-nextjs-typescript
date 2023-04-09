@@ -35,11 +35,12 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
         addtoCart: async () => {
             if (!user?.user?._id) {
-                router.push('/auth');
+                return router.push('/auth');
             }
 
             if (!user?.user?.verified) {
                 dispatch(setVerifyModal(true));
+                return;
             }
 
             const data = {
@@ -66,7 +67,6 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                 );
 
                 setIsPending(false);
-                console.log('Log in add to cart: ', res?.data?.data?.products);
                 dispatch(setCart(res?.data?.data?.products));
             } catch (error) {
                 console.log(error);

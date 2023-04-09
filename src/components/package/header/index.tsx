@@ -267,11 +267,13 @@ const Header = () => {
                                     <div className='flex gap-3'>
                                         <Link
                                             href={'/auth'}
+                                            onClick={() => setIsShow(false)}
                                             className='py-2 px-4 border border-colorPrimary bg-colorPrimary rounded-lg text-sm text-white font-medium hover:bg-colorPrimaryHover'>
                                             Sign in
                                         </Link>
                                         <Link
                                             href={'/auth'}
+                                            onClick={() => setIsShow(false)}
                                             className='py-2 px-4 border border-colorPrimary rounded-lg text-sm text-colorPrimary font-medium hover:bg-colorPrimary hover:text-white'>
                                             Sign up
                                         </Link>
@@ -285,6 +287,7 @@ const Header = () => {
                                         <Link
                                             key={nav.id}
                                             href={nav?.href || ''}
+                                            onClick={() => setIsShow(false)}
                                             className={
                                                 pathname === nav.href
                                                     ? 'flex items-center hover font-medium text-lg text-colorPrimary border-b-2 border-colorPrimary'

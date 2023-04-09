@@ -80,8 +80,11 @@ module.exports = {
                 },
 
                 modal: {
-                    '0%': { opacity: 0, transform: 'scale(0.7)' },
-                    '100%': { opacity: 1, transform: 'scale(1)' },
+                    '0%': { transform: 'scale(1)' },
+                    '1%': { transform: 'scale(.5)' },
+                    '45%': { transform: 'scale(1.05)' },
+                    '80%': { transform: 'scale(.95)' },
+                    '100%': { transform: 'scale(1)' },
                 },
             },
         },

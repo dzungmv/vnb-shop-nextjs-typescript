@@ -68,7 +68,10 @@ export type OrderType = {
     products: CartType[],
     total: number,
     status: string,
+    fullname: string,
     address: string,
     phone: string,
     payment: string,
+    createdAt: string,
+    updatedAt: string
 }

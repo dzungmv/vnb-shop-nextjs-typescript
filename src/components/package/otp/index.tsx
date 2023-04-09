@@ -5,12 +5,11 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import OtpInput from 'react-otp-input';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 import LoadingCard from '@/components/common/loading-card';
 import { setVerified } from '@/components/redux/user/userSlice';
 import { redirect, useRouter } from 'next/navigation';
+import swal from 'sweetalert';
 
 type OtpTypes = {
     title: string;
@@ -48,7 +47,11 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                 );
                 setDisabled(true);
                 setIsPendingResend(false);
-                toast.success('OTP re-send successfully, check your email');
+                swal({
+                    title: 'Success',
+                    icon: 'success',
+                    text: 'OTP has been sent to your email!',
+                });
             } catch (error: any) {
                 setIsPendingResend(false);
                 setDisabled(false);
@@ -56,7 +59,12 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
         },
 
         verifyOTP: async () => {
-            if (otp.length < 6) return toast.error('OTP is invalid');
+            if (otp.length < 6)
+                return swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'OTP must be 6 digits!',
+                });
 
             try {
                 setIsPendingVerify(true);
@@ -76,12 +84,19 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                 );
                 await dispatch(setVerified(true));
                 setIsPendingVerify(false);
-                toast.success('Account verified successfully');
-                router.push('/');
+                swal({
+                    title: 'Success',
+                    icon: 'success',
+                    text: 'Your account has been verified1',
+                }).then(() => {
+                    router.push('/');
+                });
             } catch (error) {
-                console.error(error);
-
-                toast.error('OTP is invalid');
+                swal({
+                    title: 'Error',
+                    icon: 'error',
+                    text: 'OTP is incorrect!',
+                });
                 setIsPendingVerify(false);
             }
         },
@@ -198,7 +213,6 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                     </div>
                 </div>
             </section>
-            <ToastContainer />
         </>
     );
 };
