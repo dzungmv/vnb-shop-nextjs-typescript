@@ -37,6 +37,7 @@ module.exports = {
                 modal: 'modal 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
                 fadeInTop:
                     'fadeInTop 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards',
+                skeleton: 'skeleton 1s linear infinite alternate',
             },
             keyframes: {
                 fadeUp: {
@@ -85,6 +86,11 @@ module.exports = {
                     '45%': { transform: 'scale(1.05)' },
                     '80%': { transform: 'scale(.95)' },
                     '100%': { transform: 'scale(1)' },
+                },
+
+                skeleton: {
+                    '0%': { backgroundColor: 'hls(200, 20%, 80%)' },
+                    '100%': { backgroundColor: 'hls(200, 20%, 95%)' },
                 },
             },
         },

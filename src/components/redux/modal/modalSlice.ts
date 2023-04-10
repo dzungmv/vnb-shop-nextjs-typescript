@@ -5,6 +5,7 @@ const modalSlice = createSlice({
     initialState: {
         verify: false,
         changePassword: false,
+        cancelOrder: false,
     },
     reducers: {
         setVerifyModal: (state, action) => {
@@ -12,10 +13,7 @@ const modalSlice = createSlice({
         },
         setChangePasswordModal: (state, action) => {
             state.changePassword = action.payload;
-        }
-
-
-
+        },
     }
 })
 

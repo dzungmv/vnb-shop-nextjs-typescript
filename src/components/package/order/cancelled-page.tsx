@@ -6,15 +6,20 @@ import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-const OrderedPage: React.FC = () => {
+const CancelledPage: React.FC = () => {
     const user: UserTypes = useSelector((state: any) => state.user.user);
+
     const [ordered, setOrdered] = useState<OrderType[]>([]);
 
-    const sortedOrder = ordered?.sort((x: OrderType, y: OrderType) => {
+    const orderIsPending = ordered?.filter((item: OrderType) => {
+        return item?.status === 'cancelled';
+    });
+
+    const finalOrder = orderIsPending?.sort((x: OrderType, y: OrderType) => {
         return new Date(x.updatedAt) < new Date(y.updatedAt) ? 1 : -1;
     });
 
-    const [isPending, setIsPending] = useState<boolean>(false);
+    const [isPending, setIsPending] = useState(false);
 
     useEffect(() => {
         (async () => {
@@ -38,41 +43,20 @@ const OrderedPage: React.FC = () => {
             }
         })();
     }, []);
-
     return (
         <section className=''>
             {!isPending ? (
                 <div className=''>
-                    {sortedOrder && sortedOrder.length > 0 ? (
-                        sortedOrder?.map((order: OrderType) => {
+                    {finalOrder && finalOrder.length > 0 ? (
+                        finalOrder?.map((order: OrderType) => {
                             return (
                                 <div
                                     key={order._id}
                                     className=' px-3 py-4 border rounded mb-10'>
                                     <div className='flex justify-end gap-2 mb-3'>
-                                        <div
-                                            className={`uppercase
-                                        ${
-                                            order.status === 'pending' &&
-                                            'text-yellow-500'
-                                        } 
-
-                                        ${
-                                            order.status === 'shipping' &&
-                                            'text-blue-500'
-                                        } 
-
-                                        ${
-                                            order.status === 'completed' &&
-                                            'text-green-500'
-                                        } 
-
-                                        ${
-                                            order.status === 'cancelled' &&
-                                            'text-red-500'
-                                        }`}>
-                                            {order.status}
-                                        </div>
+                                        <span className='text-sm text-red-500'>
+                                            Cancelled
+                                        </span>
                                     </div>
                                     <div className='flex flex-col gap-4'>
                                         {order.products?.map(
@@ -144,14 +128,6 @@ const OrderedPage: React.FC = () => {
                                             </p>
                                         </div>
                                     </div>
-
-                                    {order.status === 'pending' && (
-                                        <div className='flex justify-end items-center mt-4'>
-                                            <button className='px-5 py-2 text-sm font-medium text-red-500 border border-red-500 rounded-lg hover:bg-red-500 hover:text-white'>
-                                                Cancel
-                                            </button>
-                                        </div>
-                                    )}
                                 </div>
                             );
                         })
@@ -207,6 +183,6 @@ const OrderedPage: React.FC = () => {
     );
 };
 
-OrderedPage.displayName = 'OrderedPage';
+CancelledPage.displayName = 'PendingPage';
 
-export default OrderedPage;
+export default CancelledPage;
