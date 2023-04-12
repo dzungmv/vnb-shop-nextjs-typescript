@@ -3,18 +3,24 @@
 import { CartType, OrderType, UserTypes } from '@/components/types';
 import axios from 'axios';
 import Image from 'next/image';
+import { redirect } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
 const OrderedPage: React.FC = () => {
     const user: UserTypes = useSelector((state: any) => state.user.user);
     const [ordered, setOrdered] = useState<OrderType[]>([]);
+    const [isPending, setIsPending] = useState<boolean>(false);
 
     const sortedOrder = ordered?.sort((x: OrderType, y: OrderType) => {
         return new Date(x.updatedAt) < new Date(y.updatedAt) ? 1 : -1;
     });
 
-    const [isPending, setIsPending] = useState<boolean>(false);
+    useEffect(() => {
+        if (!user?.user?._id) {
+            redirect('/');
+        }
+    }, [user]);
 
     useEffect(() => {
         (async () => {
