@@ -14,11 +14,11 @@ const HeroComp = () => {
                     badminton products
                 </p>
 
-                <button className='mt-20 mobile:mt-9 py-3 px-6 bg-colorPrimary text-white rounded-md hover:bg-colorPrimaryHover'>
-                    <Link className='' href='/product'>
+                <Link className='' href='/product'>
+                    <button className='mt-20 mobile:mt-9 py-3 px-6 bg-colorPrimary text-white rounded-md hover:bg-colorPrimaryHover'>
                         Shop now
-                    </Link>
-                </button>
+                    </button>
+                </Link>
             </div>
             <figure className='w-[50%] h-[500px] mobile:w-full'>
                 <Image

@@ -5,87 +5,52 @@
             {
                 "id": 1,
                 "title": "Under 500.000đ",
-                "value": "under-500000"
+                "value": "less_than_500"
             },
             {
                 "id": 2,
                 "title": "500.000đ - 1.000.000đ",
-                "value": "500000-1000000"
+                "value": "between_500_1000"
             },
             {
                 "id": 3,
                 "title": "1.000.000đ - 2.000.000đ",
-                "value": "1000000-2000000"
+                "value": "between_1000_2000"
             },
             {
                 "id": 4,
                 "title": "2.000.000đ - 3.000.000đ",
-                "value": "2000000-3000000"
+                "value": "between_2000_3000"
             },
             {
                 "id": 5,
                 "title": "Over 3.000.000đ",
-                "value": "over-3000000"
+                "value": "greater_than_3000"
             }
         ]
     },
-    "branch": {
-        "name": "Branch",
+    "brand": {
+        "name": "Brand",
         "values": [
             {
                 "id": 1,
-                "title": "VNB",
-                "value": "vnb"
+                "title": "VNB"
             },
             {
                 "id": 2,
-                "title": "Yonex",
-                "value": "yonex"
+                "title": "Yonex"
             },
             {
                 "id": 3,
-                "title": "Lining",
-                "value": "lining"
+                "title": "Lining"
             },
             {
                 "id": 4,
-                "title": "Victor",
-                "value": "victor"
+                "title": "Kawasaki"
             },
             {
                 "id": 5,
-                "title": "Mizuno",
-                "value": "mizuno"
-            },
-            {
-                "id": 6,
-                "title": "Adidas",
-                "value": "adidas"
-            }
-        ]
-    },
-    "weight": {
-        "name": "Weight",
-        "values": [
-            {
-                "id": 1,
-                "title": "2U: 90g - 94g",
-                "value": "2U"
-            },
-            {
-                "id": 2,
-                "title": "3U: 85g - 89g",
-                "value": "3U"
-            },
-            {
-                "id": 3,
-                "title": "4U: 80g - 84g",
-                "value": "4U"
-            },
-            {
-                "id": 4,
-                "title": "5U: 74g - 79g",
-                "value": "5U"
+                "title": "Adidas"
             }
         ]
     },
@@ -94,63 +59,51 @@
         "values": [
             {
                 "id": 1,
-                "title": "VNB 1 District",
-                "value": "vnb1"
+                "title": "VNB 1 District"
             },
             {
                 "id": 2,
-                "title": "VNB 2 District",
-                "value": "vnb2"
+                "title": "VNB 2 District"
             },
             {
                 "id": 3,
-                "title": "VNB 3 District",
-                "value": "vnb3"
+                "title": "VNB 3 District"
             },
             {
                 "id": 4,
-                "title": "VNB 4 District",
-                "value": "vnb4"
+                "title": "VNB 4 District"
             },
             {
                 "id": 5,
-                "title": "VNB 5 District",
-                "value": "vnb5"
+                "title": "VNB 5 District"
             },
             {
                 "id": 6,
-                "title": "VNB 6 District",
-                "value": "vnb6"
+                "title": "VNB 6 District"
             },
             {
                 "id": 7,
-                "title": "VNB 7 District",
-                "value": "vnb7"
+                "title": "VNB 7 District"
             },
             {
                 "id": 8,
-                "title": "VNB 8 District",
-                "value": "vnb8"
+                "title": "VNB 8 District"
             },
             {
                 "id": 9,
-                "title": "VNB 9 District",
-                "value": "vnb9"
+                "title": "VNB 9 District"
             },
             {
                 "id": 10,
-                "title": "VNB 10 District",
-                "value": "vnb10"
+                "title": "VNB 10 District"
             },
             {
                 "id": 11,
-                "title": "VNB 11 District",
-                "value": "vnb11"
+                "title": "VNB 11 District"
             },
             {
                 "id": 12,
-                "title": "VNB 12 District",
-                "value": "vnb12"
+                "title": "VNB 12 District"
             }
         ]
     }

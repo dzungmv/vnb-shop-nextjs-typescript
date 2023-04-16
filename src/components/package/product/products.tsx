@@ -1,30 +1,195 @@
 'use client';
 
-import { FilterItem, ProductType } from '@/components/types';
 import Tippy from '@tippyjs/react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import axios from 'axios';
+import { useEffect, useRef, useState } from 'react';
 import 'tippy.js/themes/light.css';
 
 import catalogData from '@/components/data/catalog.json';
 import { CatalogItem } from '@/components/types';
-
+import { FilterItem, ProductType } from '@/components/types';
 import ProductCard from '@/components/common/product-card';
 import filterUI from '@/components/data/filter.json';
+import LoadingCard from '@/components/common/loading-card';
 
-type ProductsPageProps = {
-    products: ProductType[];
-};
-
-const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
+const ProductsPage: React.FC = () => {
     const [isHover, setIsHover] = useState<boolean>(false);
 
-    if (!products) return <div>Loading...</div>;
+    const [dataProducts, setDataProducts] = useState<ProductType[]>([]);
+    const [hasMore, setHasMore] = useState<boolean>(true);
+    const [page, setPage] = useState<number>(1);
+
+    const [price, setPrice] = useState<string>('');
+    const [brand, setBrand] = useState<string[]>([]);
+    const [stores, setStores] = useState<string[]>([]);
+
+    const [sort, setSort] = useState<string>('');
+
+    const elementRef = useRef(null);
+
+    const onIntersection = (entries: IntersectionObserverEntry[]) => {
+        const firstEntry = entries[0];
+
+        if (firstEntry.isIntersecting && hasMore) {
+            HANDLE.loadMore();
+        }
+    };
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            onIntersection(entries);
+        });
+
+        if (observer && elementRef.current) {
+            observer.observe(elementRef.current);
+        }
+
+        return () => {
+            if (observer) {
+                observer.disconnect();
+            }
+        };
+    }, [dataProducts]);
+
+    const HANDLE = {
+        loadMore: async () => {
+            try {
+                const res = await axios.get(
+                    `${process.env.SERVER_URL}/product/get-products?page=${page}&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                );
+
+                if (res.data.data.length === 0) {
+                    setHasMore(false);
+                }
+
+                setPage((prev) => prev + 1);
+                setDataProducts((prevData) => [...prevData, ...res.data.data]);
+            } catch (error) {
+                setHasMore(false);
+            }
+        },
+        sortPriceIncreasing: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=price_asc&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+
+        sortPriceDecreasing: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+        sortNameIncreasing: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+        sortNameDecreasing: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+        filterByBrand: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+        filterByPrice: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+
+        filterByStores: async () => {
+            setHasMore(true);
+            setPage(1);
+
+            const res = await axios.get(
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+            );
+
+            setDataProducts(res.data.data);
+            setPage((prev) => prev + 1);
+        },
+    };
+
+    useEffect(() => {
+        if (sort === 'price_asc') {
+            HANDLE.sortPriceIncreasing();
+        }
+
+        if (sort === 'price_desc') {
+            HANDLE.sortPriceDecreasing();
+        }
+
+        if (sort === 'name_asc') {
+            HANDLE.sortNameIncreasing();
+        }
+
+        if (sort === 'name_desc') {
+            HANDLE.sortNameDecreasing();
+        }
+    }, [sort]);
+
+    useEffect(() => {
+        if (brand.length > 0) {
+            HANDLE.filterByBrand();
+        }
+    }, [brand]);
+
+    useEffect(() => {
+        if (price.length > 0) {
+            HANDLE.filterByPrice();
+        }
+    }, [price]);
+
+    useEffect(() => {
+        if (stores.length > 0) {
+            HANDLE.filterByStores();
+        }
+    }, [stores]);
 
     return (
         <>
-            <section className=' max-w-[1260px] mx-auto mt-5 flex gap-5'>
+            <section className=' max-w-[1260px] mx-auto mt-8 flex gap-5 items-start'>
                 <div className='w-[23%] rounded-lg border p-3 tablet:hidden'>
                     <div className=' pb-4'>
                         <h2 className=' font-medium mb-2 text-lg text-gray-600'>
@@ -37,12 +202,17 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
                                         key={item.id}
                                         className='flex items-center gap-2'>
                                         <input
-                                            type='checkbox'
-                                            id='under500'
+                                            type='radio'
+                                            id={item.title}
                                             value={item.value}
+                                            className=' hover:cursor-pointer'
+                                            onChange={(e) => {
+                                                setPrice(e.target.value);
+                                            }}
+                                            checked={price === item.value}
                                         />
                                         <label
-                                            htmlFor='under500'
+                                            htmlFor={item.title}
                                             className='text-sm hover:text-colorPrimary hover:cursor-pointer'>
                                             {item.title}
                                         </label>
@@ -55,21 +225,38 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
 
                     <div className=' py-4'>
                         <h2 className=' font-medium mb-2 text-lg text-gray-600'>
-                            {filterUI.branch.name}
+                            {filterUI.brand.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
-                            {filterUI.branch.values.map((item: FilterItem) => {
+                            {filterUI.brand.values.map((item: FilterItem) => {
                                 return (
                                     <div
                                         key={item.id}
                                         className='flex items-center gap-2'>
                                         <input
                                             type='checkbox'
-                                            id='under500'
-                                            value={item.value}
+                                            id={item.title}
+                                            value={item.title}
+                                            className=' hover:cursor-pointer'
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setBrand((prev) => [
+                                                        ...prev,
+                                                        e.target.value,
+                                                    ]);
+                                                } else {
+                                                    setBrand((prev) =>
+                                                        prev.filter(
+                                                            (item) =>
+                                                                item !==
+                                                                e.target.value
+                                                        )
+                                                    );
+                                                }
+                                            }}
                                         />
                                         <label
-                                            htmlFor='under500'
+                                            htmlFor={item.title}
                                             className='text-sm hover:text-colorPrimary hover:cursor-pointer'>
                                             {item.title}
                                         </label>
@@ -79,33 +266,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
                         </div>
                     </div>
 
-                    <hr />
-
-                    <div className=' py-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
-                            {filterUI.weight.name}
-                        </h2>
-                        <div className='flex flex-col gap-2'>
-                            {filterUI.weight.values.map((item: FilterItem) => {
-                                return (
-                                    <div
-                                        key={item.id}
-                                        className='flex items-center gap-2'>
-                                        <input
-                                            type='checkbox'
-                                            id='under500'
-                                            value={item.value}
-                                        />
-                                        <label
-                                            htmlFor='under500'
-                                            className='text-sm hover:text-colorPrimary hover:cursor-pointer'>
-                                            {item.title}
-                                        </label>
-                                    </div>
-                                );
-                            })}
-                        </div>
-                    </div>
                     <hr />
                     <div className=' py-4'>
                         <h2 className=' font-medium mb-2 text-lg text-gray-600'>
@@ -119,11 +279,28 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
                                         className='flex items-center gap-2'>
                                         <input
                                             type='checkbox'
-                                            id='under500'
-                                            value={item.value}
+                                            id={item.title}
+                                            value={item.title}
+                                            className=' hover:cursor-pointer'
+                                            onChange={(e) => {
+                                                if (e.target.checked) {
+                                                    setStores((prev) => [
+                                                        ...prev,
+                                                        e.target.value,
+                                                    ]);
+                                                } else {
+                                                    setStores((prev) =>
+                                                        prev.filter(
+                                                            (item) =>
+                                                                item !==
+                                                                e.target.value
+                                                        )
+                                                    );
+                                                }
+                                            }}
                                         />
                                         <label
-                                            htmlFor='under500'
+                                            htmlFor={item.title}
                                             className='text-sm hover:text-colorPrimary hover:cursor-pointer'>
                                             {item.title}
                                         </label>
@@ -135,59 +312,6 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
                 </div>
 
                 <div className='w-[77%] tablet:w-full'>
-                    <header className='flex items-center justify-between'>
-                        <h2 className=' font-medium text-xl'>Racket</h2>
-                        <div className='flex gap-2 items-center text-sm'>
-                            <div>
-                                <i className='fa-solid fa-bars-sort'></i>
-                                <span className='ml-1 text-gray-500'>
-                                    Sort:
-                                </span>
-                            </div>
-
-                            <Tippy
-                                content={
-                                    <section className='w-[200px]'>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            A-Z
-                                        </div>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            Z-A
-                                        </div>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            Price increasing
-                                        </div>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            Price decreasing
-                                        </div>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            Oldest product
-                                        </div>
-                                        <div className='p-2 hover:bg-gray-200 hover:cursor-pointer'>
-                                            Newest product
-                                        </div>
-                                    </section>
-                                }
-                                arrow={false}
-                                interactive
-                                theme='light'
-                                placement='bottom'>
-                                <div
-                                    className='group hover:cursor-pointer'
-                                    onMouseEnter={() => setIsHover(true)}
-                                    onMouseLeave={() => setIsHover(false)}>
-                                    Default{' '}
-                                    <i
-                                        className={
-                                            isHover
-                                                ? 'fa-regular fa-chevron-up transition-all'
-                                                : 'fa-regular fa-chevron-down transition-all'
-                                        }></i>
-                                </div>
-                            </Tippy>
-                        </div>
-                    </header>
-
                     <div className='flex flex-wrap my-5 gap-5'>
                         {catalogData.map((item: CatalogItem) => {
                             return (
@@ -214,23 +338,98 @@ const ProductsPage: React.FC<ProductsPageProps> = ({ products }) => {
                         })}
                     </div>
 
-                    <div className='flex flex-wrap gap-3 mt-3'>
-                        {products.map((item: ProductType, index: number) => {
-                            return (
+                    <header className='flex items-center justify-between'>
+                        <h2 className=' font-medium text-xl'>Products</h2>
+                        <div className='flex gap-2 items-center text-sm'>
+                            <div>
+                                <i className='fa-solid fa-bars-sort'></i>
+                                <span className='ml-1 text-gray-500'>
+                                    Sort:
+                                </span>
+                            </div>
+
+                            <Tippy
+                                content={
+                                    <section className='w-[200px]'>
+                                        <div
+                                            className='p-2 hover:bg-gray-200 hover:cursor-pointer'
+                                            onClick={() => setSort('name_asc')}>
+                                            A-Z
+                                        </div>
+                                        <div
+                                            className='p-2 hover:bg-gray-200 hover:cursor-pointer'
+                                            onClick={() =>
+                                                setSort('name_desc')
+                                            }>
+                                            Z-A
+                                        </div>
+                                        <div
+                                            className='p-2 hover:bg-gray-200 hover:cursor-pointer'
+                                            onClick={() =>
+                                                setSort('price_asc')
+                                            }>
+                                            Price increasing
+                                        </div>
+                                        <div
+                                            className='p-2 hover:bg-gray-200 hover:cursor-pointer'
+                                            onClick={() =>
+                                                setSort('price_desc')
+                                            }>
+                                            Price decreasing
+                                        </div>
+                                    </section>
+                                }
+                                arrow={false}
+                                interactive
+                                theme='light'
+                                placement='bottom'>
                                 <div
-                                    key={index}
-                                    className='w-[calc(100%/4-9px)] onlyTablet:w-[calc(100%/3-8px)] mobile:w-full'>
-                                    <ProductCard
-                                        id={item._id}
-                                        name={item.name}
-                                        slug={item.slug}
-                                        price={item.price}
-                                        imageSrc={item.image}
-                                    />
+                                    className='group hover:cursor-pointer'
+                                    onMouseEnter={() => setIsHover(true)}
+                                    onMouseLeave={() => setIsHover(false)}>
+                                    Default{' '}
+                                    <i
+                                        className={
+                                            isHover
+                                                ? 'fa-regular fa-chevron-up transition-all'
+                                                : 'fa-regular fa-chevron-down transition-all'
+                                        }></i>
                                 </div>
-                            );
-                        })}
+                            </Tippy>
+                        </div>
+                    </header>
+
+                    <div className='flex flex-wrap gap-3 mt-3'>
+                        {dataProducts.map(
+                            (item: ProductType, index: number) => {
+                                return (
+                                    <div
+                                        key={index}
+                                        className='w-[calc(100%/4-9px)] onlyTablet:w-[calc(100%/3-8px)] mobile:w-full'>
+                                        <ProductCard
+                                            id={item._id}
+                                            name={item.name}
+                                            slug={item.slug}
+                                            price={item.price}
+                                            imageSrc={item.image}
+                                        />
+                                    </div>
+                                );
+                            }
+                        )}
                     </div>
+
+                    {hasMore && (
+                        <div
+                            ref={elementRef}
+                            className='flex justify-center mt-5'>
+                            <LoadingCard
+                                width='25'
+                                height='25'
+                                content='Load more...'
+                            />
+                        </div>
+                    )}
                 </div>
             </section>
 

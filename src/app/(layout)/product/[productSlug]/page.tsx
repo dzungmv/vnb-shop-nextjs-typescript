@@ -1,6 +1,5 @@
 import ProductDetails from '@/components/package/product/product-details';
 import { ProductType } from '@/components/types';
-import axios from 'axios';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 

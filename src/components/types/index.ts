@@ -25,7 +25,7 @@ export interface CatalogItem {
 export interface FilterItem {
     id: number;
     title: string;
-    value: string;
+    value?: string;
 }
 
 export type ProductCard = {

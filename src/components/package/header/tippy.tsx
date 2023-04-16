@@ -59,7 +59,6 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                 if (error?.response?.status === 401) {
                     dispatch(logout());
                 }
-                console.error(error);
             }
         },
     };
