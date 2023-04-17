@@ -78,31 +78,36 @@ const CartPage: React.FC = () => {
             }
         },
         setQuantity: (_id: string, quantity: string) => {
-            setCart((oldProducts: CartType[]) => {
-                const productIndex = oldProducts.findIndex((product) => {
-                    return product._id === _id;
-                });
-
-                if (productIndex !== -1) {
-                    oldProducts[productIndex].product_quantity =
-                        Number(quantity);
-                }
-
-                return [...oldProducts];
+            const productIndex = cart.findIndex((product) => {
+                return product._id === _id;
             });
+
+            if (productIndex !== -1) {
+                setCart((oldProducts: CartType[]) => {
+                    const copy = JSON.stringify(oldProducts);
+                    const data = JSON.parse(copy);
+
+                    data[productIndex].product_quantity = parseInt(quantity);
+
+                    return data;
+                });
+            }
         },
         removeProductById: (_id: string) => {
-            setCart((oldProducts: CartType[]) => {
-                const productIndex = oldProducts.findIndex((product) => {
-                    return product._id === _id;
-                });
-
-                if (productIndex !== -1) {
-                    oldProducts.splice(productIndex, 1);
-                }
-
-                return [...oldProducts];
+            const productIndex = cart.findIndex((product) => {
+                return product._id === _id;
             });
+
+            if (productIndex !== -1) {
+                setCart((oldProducts: CartType[]) => {
+                    const copy = JSON.stringify(oldProducts);
+                    const data = JSON.parse(copy);
+
+                    data.splice(productIndex, 1);
+
+                    return data;
+                });
+            }
         },
         checkout: async () => {
             try {
@@ -410,7 +415,7 @@ const CartPage: React.FC = () => {
                                             return (
                                                 <div key={index}>
                                                     <div className='flex items-center justify-between flex-wrap mb-5'>
-                                                        <div className='flex items-center'>
+                                                        <div className='flex items-center w-[65%] mobile:w-full'>
                                                             <figure className='w-[80px]'>
                                                                 <Image
                                                                     className='w-full h-full object-cover'
@@ -431,7 +436,7 @@ const CartPage: React.FC = () => {
                                                             </h2>
                                                         </div>
 
-                                                        <div className='flex items-center gap-10 mobile:mt-2 justify-between mobile:w-full'>
+                                                        <div className='flex items-center w-[35%] mobile:mt-2 justify-between mobile:w-full'>
                                                             <div className='flex items-center gap-3'>
                                                                 <div className='flex items-center gap-1'>
                                                                     <button
@@ -549,7 +554,7 @@ const CartPage: React.FC = () => {
                             </div>
 
                             <div className='w-[calc(30%-32px)] tablet:w-full px-3 py-4 mobile:px-0'>
-                                <div className='mb-6'>
+                                {/* <div className='mb-6'>
                                     <p className='text-xs'>
                                         Enter promote code
                                     </p>
@@ -562,7 +567,7 @@ const CartPage: React.FC = () => {
                                             Submit
                                         </button>
                                     </div>
-                                </div>
+                                </div> */}
 
                                 <div className='flex items-center justify-between text-sm'>
                                     <p>Shipping cost</p>

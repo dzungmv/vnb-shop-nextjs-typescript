@@ -43,16 +43,16 @@
     },
     {
         "id": 7,
-        "name": "Badminton Balo",
-        "href": "/badminton-balo",
+        "name": "Badminton Backpack",
+        "href": "/badminton-backpack",
         "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/balo.webp",
-        "imageAlt": "Badminton Balo"
+        "imageAlt": "Badminton Backpack"
     },
     {
         "id": 8,
-        "name": "Badminton Equipment",
-        "href": "/badminton-equipment",
+        "name": "Badminton Accessories",
+        "href": "/badminton-accessories",
         "imageSrc": "https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/catalog/equip.webp",
-        "imageAlt": "Badminton Equipment"
+        "imageAlt": "Badminton Accessories"
     }
 ]

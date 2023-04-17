@@ -11,6 +11,10 @@ module.exports = {
             backgroundColor: {
                 bgModal: 'rgba(0, 0, 0, 0.5)',
             },
+            backgroundImage: {
+                feature:
+                    'linear-gradient(135deg, rgb(255, 159, 181) 0%, rgb(168, 9, 70) 100%)',
+            },
             screens: {
                 mobile: { max: '600px' },
                 onlyTablet: { min: '601px', max: '1023px' },
@@ -92,6 +96,12 @@ module.exports = {
                     '0%': { backgroundColor: 'hls(200, 20%, 80%)' },
                     '100%': { backgroundColor: 'hls(200, 20%, 95%)' },
                 },
+            },
+            boxShadow: {
+                f: '#3644b7 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
+                s: '#925ff6 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
+                t: '#d781f0 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
+                fo: '#f5e3c2 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
             },
         },
     },

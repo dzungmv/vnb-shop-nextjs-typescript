@@ -2,19 +2,15 @@
 
 import Tippy from '@tippyjs/react';
 import axios from 'axios';
-import Image from 'next/image';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import 'tippy.js/themes/light.css';
 
 import LoadingCard from '@/components/common/loading-card';
 import ProductCard from '@/components/common/product-card';
-import catalogData from '@/components/data/catalog.json';
 import filterUI from '@/components/data/filter.json';
-import { CatalogItem, FilterItem, ProductType } from '@/components/types';
+import { FilterItem, ProductType } from '@/components/types';
 
-const ProductsPage: React.FC = () => {
+const AccessoriesProductsPage: React.FC = () => {
     const [isHover, setIsHover] = useState<boolean>(false);
 
     const [dataProducts, setDataProducts] = useState<ProductType[]>([]);
@@ -60,7 +56,7 @@ const ProductsPage: React.FC = () => {
         loadMore: async () => {
             try {
                 const res = await axios.get(
-                    `${process.env.SERVER_URL}/product/get-products?page=${page}&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                    `${process.env.SERVER_URL}/product/get-products?page=${page}&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
                 );
 
                 if (res.data.data.length === 0) {
@@ -78,7 +74,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=price_asc&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=price_asc&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -90,7 +86,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -101,7 +97,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -112,7 +108,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -123,7 +119,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -134,7 +130,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -146,7 +142,7 @@ const ProductsPage: React.FC = () => {
             setPage(1);
 
             const res = await axios.get(
-                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
+                `${process.env.SERVER_URL}/product/get-products?page=1&limit=12&type=accessories&sort=${sort}&brand=${brand}&price=${price}&stores=${stores}`
             );
 
             setDataProducts(res.data.data);
@@ -329,34 +325,10 @@ const ProductsPage: React.FC = () => {
                 </div>
 
                 <div className='w-[77%] tablet:w-full'>
-                    <div className='flex flex-wrap my-5 gap-5 mt-0'>
-                        {catalogData.map((item: CatalogItem) => {
-                            return (
-                                <Link
-                                    key={item.id}
-                                    className={
-                                        'group w-[calc(100%/4-15px)] h-[100px] rounded-lg relative overflow-hidden flex items-center justify-center transition-all hover:bg-[rgba(0,0,0,0.7)] hover:cursor-pointer mobile:w-full onlyTablet:w-[calc(100%/2-15px)]'
-                                    }
-                                    href={`/product/${item.href}`}>
-                                    <Image
-                                        className='w-full h-full object-cover rounded-lg z-[-1]'
-                                        src={item.imageSrc}
-                                        alt={item.imageAlt}
-                                        width='0'
-                                        height='0'
-                                        sizes='100vw'
-                                    />
-
-                                    <div className='absolute text-white font-medium text-lg animate-fadeUp hidden group-hover:block z-1'>
-                                        {item.name}
-                                    </div>
-                                </Link>
-                            );
-                        })}
-                    </div>
-
                     <header className='flex items-center justify-between'>
-                        <h2 className=' font-medium text-xl'>Products</h2>
+                        <h2 className=' font-medium text-xl'>
+                            Badminton Accessories
+                        </h2>
                         <div className='flex gap-2 items-center text-sm'>
                             <div>
                                 <i className='fa-solid fa-bars-sort'></i>
@@ -595,6 +567,6 @@ const ProductsPage: React.FC = () => {
     );
 };
 
-ProductsPage.displayName = 'ProductsPage';
+AccessoriesProductsPage.displayName = 'AccessoriesProductsPage';
 
-export default ProductsPage;
+export default AccessoriesProductsPage;

@@ -8,7 +8,7 @@ import axios from 'axios';
 
 import LoadingCard from '@/components/common/loading-card';
 import { setVerifyModal } from '@/components/redux/modal/modalSlice';
-import { setCart } from '@/components/redux/user/userSlice';
+import { logout, setCart } from '@/components/redux/user/userSlice';
 import { ProductType, UserTypes } from '@/components/types';
 
 type Props = {
@@ -68,10 +68,13 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
 
                 setIsPending(false);
                 dispatch(setCart(res?.data?.data?.products));
-            } catch (error) {
-                console.log(error);
+            } catch (error: any) {
                 setIsPending(false);
                 setError('Something went wrong');
+
+                if (error?.response?.status === 401) {
+                    dispatch(logout());
+                }
             }
         },
     };

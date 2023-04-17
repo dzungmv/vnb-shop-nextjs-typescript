@@ -1,14 +1,14 @@
-import RacketProductsPage from '@/components/package/product/racket-products';
+import ShirtProductsPage from '@/components/package/product/shirt-products';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-    title: 'Badminton Racket',
+    title: 'Badminton Shirt',
 };
 
 export default function Page() {
     return (
         <>
-            <RacketProductsPage />
+            <ShirtProductsPage />
         </>
     );
 }
