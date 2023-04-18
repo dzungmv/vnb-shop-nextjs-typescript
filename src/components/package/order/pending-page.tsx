@@ -47,7 +47,6 @@ const PendingPage: React.FC = () => {
                 setOrdered(res?.data?.data?.orders);
                 setIsPending(false);
             } catch (error) {
-                console.log(error);
                 setIsPending(false);
             }
         })();
@@ -74,8 +73,6 @@ const PendingPage: React.FC = () => {
                         },
                     }
                 );
-
-                console.log(res.data);
 
                 setIsCancelPending(false);
                 setCancelModal(false);

@@ -9,30 +9,30 @@ type Params = {
     };
 };
 
-export async function generateMetadata({
-    params: { productSlug },
-}: Params): Promise<Metadata> {
-    const res = await fetch(
-        `${process.env.SERVER_URL}/product/get-product/${productSlug}`
-    );
+// export async function generateMetadata({
+//     params: { productSlug },
+// }: Params): Promise<Metadata> {
+//     const res = await fetch(
+//         `${process.env.SERVER_URL}/product/get-product/${productSlug}`
+//     );
 
-    const parseJSON = await res.json();
+//     const parseJSON = await res.json();
 
-    if (parseJSON.status === false) {
-        return {
-            title: 'Product not found!',
-        };
-    }
+//     if (parseJSON.status === false) {
+//         return {
+//             title: 'Product not found!',
+//         };
+//     }
 
-    const product = (await parseJSON.data) as ProductType;
+//     const product = (await parseJSON.data) as ProductType;
 
-    const metadata = {
-        title: product?.name,
-        icon: '/icon.png',
-    };
+//     const metadata = {
+//         title: product?.name,
+//         icon: '/icon.png',
+//     };
 
-    return metadata;
-}
+//     return metadata;
+// }
 
 export default async function Page({ params: { productSlug } }: Params) {
     const res = await fetch(

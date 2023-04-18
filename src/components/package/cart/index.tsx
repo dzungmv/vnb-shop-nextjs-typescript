@@ -128,7 +128,6 @@ const CartPage: React.FC = () => {
                 setSuccess(true);
                 window.scrollTo(0, 0);
             } catch (error: any) {
-                console.log(error);
                 setIsPending(false);
 
                 if (error?.response?.data?.type === 'out_of_stock') {
@@ -174,7 +173,6 @@ const CartPage: React.FC = () => {
                     router.push('/order');
                 });
             } catch (error) {
-                console.log(error);
                 setIsPendingOrder(false);
             }
         },

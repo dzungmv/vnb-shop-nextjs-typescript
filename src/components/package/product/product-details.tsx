@@ -79,6 +79,9 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
         },
     };
 
+    if (!product)
+        return <LoadingCard width='0' height='0' content='Loading...' />;
+
     return (
         <section className='max-w-[1260px] mx-auto mt-8'>
             <div className='flex gap-7 items-start flex-wrap mb-8'>

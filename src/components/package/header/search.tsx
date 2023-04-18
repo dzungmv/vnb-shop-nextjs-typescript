@@ -19,8 +19,6 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
 
     const [searchResult, setSearchResult] = useState<ProductType[]>([]);
 
-    console.log('search', searchResult);
-
     useEffect(() => {
         if (!searchDeb) return;
         (async () => {
@@ -33,13 +31,10 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
                     }
                 );
 
-                console.log('check', res.data.data);
-
                 setSearchResult(res.data.data);
 
                 setSearchPending(false);
             } catch (error: any) {
-                console.log(error);
                 setSearchPending(false);
             }
         })();

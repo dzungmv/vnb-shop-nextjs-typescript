@@ -38,7 +38,6 @@ const CompletedPage: React.FC = () => {
                 setOrdered(res?.data?.data?.orders);
                 setIsPending(false);
             } catch (error) {
-                console.log(error);
                 setIsPending(false);
             }
         })();
