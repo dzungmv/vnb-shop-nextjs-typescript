@@ -139,7 +139,7 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                     <h3 className='text-2xl font-medium'>{title}</h3>
                     <p className='mt-3'>
                         We just sent OTP to your email{' '}
-                        <span className=' text-colorPrimary font-medium'>
+                        <span className='text-colorPrimary font-medium'>
                             {user?.user?.email}
                         </span>
                     </p>
@@ -163,7 +163,7 @@ const OtpComp: React.FC<OtpTypes> = ({ title }) => {
                     </div>
 
                     <p className='text-center mt-8 text-sm '>
-                        Didn't receive OTP?{' '}
+                        Didn&apos;t receive OTP?{' '}
                         {disabled ? (
                             <span className='font-medium text-colorPrimary'>
                                 {countDown}

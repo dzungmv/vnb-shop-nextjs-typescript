@@ -35,13 +35,13 @@ const navs = [
     },
     {
         id: 3,
-        name: 'Sale off',
-        href: '',
+        name: 'Racket',
+        href: '/product/badminton-racket',
     },
     {
         id: 4,
-        name: 'Badminton News',
-        href: '',
+        name: 'Accessories',
+        href: '/product/badminton-accessories',
     },
 ];
 
@@ -108,7 +108,7 @@ const Header = () => {
                 <div className='max-w-[1260px] h-full mx-auto flex items-center justify-between relative'>
                     <div className='flex items-center gap-6 h-full'>
                         <Link href='/'>
-                            <figure className=' w-[50px] h-full laptop:pl-4 tablet:pl-4'>
+                            <figure className='w-[50px] h-full laptop:pl-4 tablet:pl-4'>
                                 <Image
                                     className='w-full h-full object-cover'
                                     src={'/icon.png'}
@@ -131,7 +131,7 @@ const Header = () => {
                         </div>
 
                         {searchContainer && (
-                            <div className='search-mobile z-[1001] w-[40%] h-full bg-white absolute l-0 animate-fadeInLeft flex items-center tablet:w-full  '>
+                            <div className='search-mobile z-[1001] w-[40%] h-full bg-white absolute l-0 animate-fadeInLeft flex items-center tablet:w-full'>
                                 <SearchComp
                                     changeState={() =>
                                         setSearchContainer(false)
@@ -140,7 +140,7 @@ const Header = () => {
                             </div>
                         )}
                     </div>
-                    <div className=' flex-1 flex items-center justify-end gap-4 h-full mobile:gap-3 tablet:pr-4 laptop:pr-4'>
+                    <div className='flex-1 flex items-center justify-end gap-4 h-full mobile:gap-3 tablet:pr-4 laptop:pr-4'>
                         <nav className='flex h-full tablet:hidden'>
                             {navs.map((nav) => {
                                 return (
@@ -164,7 +164,7 @@ const Header = () => {
                                     <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 transition-all ease-in duration-[0.3s] relative'>
                                         <i className='fa-solid fa-cart-shopping group-hover:text-colorPrimary'></i>
                                         {cart && cart.length > 0 && (
-                                            <div className=' absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
+                                            <div className='absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
                                                 <span className='text-xs text-white'>
                                                     {cart?.length}
                                                 </span>
@@ -182,11 +182,11 @@ const Header = () => {
                                     <div className='group w-[40px] h-[40px] rounded-full flex items-center justify-center hover:cursor-pointer bg-slate-200 relative'>
                                         <i className='fa-solid fa-user hover:text-colorPrimary'></i>
                                         {user?.user?.verified ? (
-                                            <div className=' absolute bottom-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-green-500'>
+                                            <div className='absolute bottom-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-green-500'>
                                                 <i className='fa-solid fa-check text-white text-xs'></i>
                                             </div>
                                         ) : (
-                                            <div className=' absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
+                                            <div className='absolute top-0 right-[-3px] w-4 h-4 flex items-center justify-center rounded-full bg-colorPrimary'>
                                                 <span className='text-xs text-white'>
                                                     1
                                                 </span>
@@ -195,7 +195,7 @@ const Header = () => {
                                     </div>
                                 </Tippy>
 
-                                <div className=' mobile:hidden'>
+                                <div className='mobile:hidden'>
                                     <p>{user.user.name}</p>
                                 </div>
                             </>
@@ -232,7 +232,7 @@ const Header = () => {
                     <header className='flex items-center justify-between'>
                         {' '}
                         <Link href='/'>
-                            <figure className=' w-[50px] h-full'>
+                            <figure className='w-[50px] h-full'>
                                 <Image
                                     className='w-full h-full object-cover'
                                     src={'/icon.png'}
@@ -245,19 +245,19 @@ const Header = () => {
                             </figure>
                         </Link>
                         <div
-                            className=' w-9 h-9 flex items-center justify-center rounded-full border hover:cursor-pointer hover:bg-slate-200'
+                            className='w-9 h-9 flex items-center justify-center rounded-full border hover:cursor-pointer hover:bg-slate-200'
                             onClick={() => setIsShow(false)}>
                             <i className='fa-solid fa-xmark text-xl text-gray-600'></i>
                         </div>
                     </header>
 
-                    <div className=' mt-3'>
+                    <div className='mt-3'>
                         <div>
                             {user?.tokens?.accessToken ? (
                                 <>
                                     <p>
                                         Hello,{' '}
-                                        <strong className=' text-colorPrimary'>
+                                        <strong className='text-colorPrimary'>
                                             {user?.user?.name}
                                         </strong>{' '}
                                     </p>

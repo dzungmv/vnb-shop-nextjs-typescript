@@ -80,7 +80,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
     };
 
     return (
-        <section className=' max-w-[1260px] mx-auto mt-8'>
+        <section className='max-w-[1260px] mx-auto mt-8'>
             <div className='flex gap-7 items-start flex-wrap mb-8'>
                 <div className='w-[calc(75%-14px)] tablet:w-full mobile:gap-y-4'>
                     <div className='w-full flex flex-wrap'>
@@ -104,21 +104,21 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                             <div className='flex text-center gap-1 mt-2 text-sm'>
                                 <p>
                                     Branch:{' '}
-                                    <span className=' text-colorPrimary'>
+                                    <span className='text-colorPrimary'>
                                         {product.brand}
                                     </span>
                                 </p>
                                 |
                                 <p>
                                     Status:{' '}
-                                    <span className=' text-colorPrimary'>
+                                    <span className='text-colorPrimary'>
                                         In stock
                                     </span>
                                 </p>
                             </div>
 
                             <div className='flex mt-2 items-center gap-3'>
-                                <h3 className=' text-[24px] font-medium text-colorPrimary'>
+                                <h3 className='text-[24px] font-medium text-colorPrimary'>
                                     {product.price.toLocaleString()}₫
                                 </h3>
                                 <p className='text-lg text-gray-400 line-through'>
@@ -127,29 +127,31 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                                 </p>
                             </div>
 
-                            <div className='p-3 mt-7 border border-dashed border-colorPrimary relative rounded-lg bg-slate-50'>
-                                <div className='flex flex-col gap-2 pt-4'>
-                                    {product.endows.map((item, index) => {
-                                        return (
-                                            <p
-                                                key={index}
-                                                className='flex items-center gap-2 text-sm'>
-                                                <i className='fa-solid fa-check text-[#685487]'></i>
-                                                <span>{item}</span>
-                                            </p>
-                                        );
-                                    })}
-                                </div>
+                            {product?.endows && product?.endows?.length > 0 && (
+                                <div className='p-3 mt-7 border border-dashed border-colorPrimary relative rounded-lg bg-slate-50'>
+                                    <div className='flex flex-col gap-2 pt-4'>
+                                        {product.endows.map((item, index) => {
+                                            return (
+                                                <p
+                                                    key={index}
+                                                    className='flex items-center gap-2 text-sm'>
+                                                    <i className='fa-solid fa-check text-[#685487]'></i>
+                                                    <span>{item}</span>
+                                                </p>
+                                            );
+                                        })}
+                                    </div>
 
-                                <div className=' absolute top-[-17px] left-3  px-5 border py-1 border-colorPrimary rounded bg-white flex items-center gap-2'>
-                                    <i className='fa-solid fa-gift text-xl text-[#685487] animate-bell'></i>
-                                    <span className='text-[#685487] font-medium'>
-                                        Endow
-                                    </span>
+                                    <div className='absolute top-[-17px] left-3  px-5 border py-1 border-colorPrimary rounded bg-white flex items-center gap-2'>
+                                        <i className='fa-solid fa-gift text-xl text-[#685487] animate-bell'></i>
+                                        <span className='text-[#685487] font-medium'>
+                                            Endow
+                                        </span>
+                                    </div>
                                 </div>
-                            </div>
+                            )}
 
-                            <div className=' flex items-center gap-5 mt-4'>
+                            <div className='flex items-center gap-5 mt-4'>
                                 <div className='flex items-center gap-1'>
                                     <button
                                         className='w-[26px] h-[26px] rounded-full flex items-center justify-center bg-colorPrimary hover:bg-colorPrimaryHover disabled:bg-gray-300'
@@ -158,7 +160,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                                         <i className='fa-solid fa-minus text-sm text-white'></i>
                                     </button>
                                     <input
-                                        className=' text-center border border-colorPrimary w-[90px] py-1 rounded-md'
+                                        className='text-center border border-colorPrimary w-[90px] py-1 rounded-md'
                                         type='number'
                                         value={quantity}
                                         onChange={(e) => {
@@ -182,7 +184,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                                 </div>
 
                                 <button
-                                    className=' py-2 px-3 text-sm font-medium rounded-md text-colorPrimary border border-colorPrimary hover:bg-colorPrimary hover:text-white'
+                                    className='py-2 px-3 text-sm font-medium rounded-md text-colorPrimary border border-colorPrimary hover:bg-colorPrimary hover:text-white'
                                     onClick={HANDLE.addtoCart}>
                                     <i className='fa-solid fa-cart-shopping'></i>
                                     <span> Add to cart</span>
@@ -225,8 +227,8 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                     </div>
                 </div>
 
-                <div className=' w-[calc(25%-14px)] border border-dashed border-colorPrimary p-3 rounded-lg mt-5 tablet:w-full sticky top-[95px]'>
-                    <div className=' bg-colorPrimary mt-1'>
+                <div className='w-[calc(25%-14px)] border border-dashed border-colorPrimary p-3 rounded-lg mt-5 tablet:w-full sticky top-[95px]'>
+                    <div className='bg-colorPrimary mt-1'>
                         {product.stores.map((item, index) => {
                             return (
                                 <div key={index}>
@@ -240,7 +242,7 @@ const ProductDetails: React.FC<Props> = ({ product }) => {
                         })}
                     </div>
 
-                    <div className=' absolute top-[-17%] left-2  px-5 py-1 border border-colorPrimary rounded bg-white text-colorPrimary font-medium'>
+                    <div className='absolute top-[-17%] left-2  px-5 py-1 border border-colorPrimary rounded bg-white text-colorPrimary font-medium'>
                         Available at
                     </div>
                 </div>

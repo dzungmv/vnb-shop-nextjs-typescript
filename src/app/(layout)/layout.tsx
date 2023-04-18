@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <SubHeaderComp />
             <section>
                 <Header />
-                <main className=' laptop:px-4 tablet:px-4'>{children}</main>
+                <main className='laptop:px-4 tablet:px-4'>{children}</main>
             </section>
             <Footer />
         </>

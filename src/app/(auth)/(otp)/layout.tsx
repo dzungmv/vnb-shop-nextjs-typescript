@@ -2,7 +2,7 @@ import Header from '@/components/package/header';
 import SubHeaderComp from '@/components/package/header/subheader';
 import type { Metadata } from 'next';
 
-export const meta: Metadata = {
+export const metadata: Metadata = {
     title: 'OTP verify',
 };
 

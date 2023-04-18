@@ -46,17 +46,17 @@ const Modal: React.FC<ModalProps> = ({
             window.removeEventListener('keydown', handleEsc);
             document.body.style.overflow = 'unset';
         };
-    }, [open]);
+    }, [open, close]);
     return (
         <>
             {open && (
                 <section
-                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center backdrop-blur-[5px]  z-[1001] overflow-y-auto mobile:px-2'
+                    className='fixed top-0 left-0 right-0 bottom-0 flex justify-center items-center backdrop-blur-[5px] z-[1001] overflow-y-auto mobile:px-2'
                     onClick={closeOutside ? handleClickOutside : undefined}>
                     <div
-                        className=' bg-white rounded-lg shadow-xl animate-modal mobile:w-full'
+                        className='bg-white rounded-lg shadow-xl animate-modal mobile:w-full'
                         ref={modalRef}>
-                        <div className=' p-2 shadow-sm relative'>
+                        <div className='p-2 shadow-sm relative'>
                             <h3 className='text-lg font-medium text-center '>
                                 {title}
                             </h3>

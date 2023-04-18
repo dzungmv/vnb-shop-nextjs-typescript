@@ -5,18 +5,18 @@ import Link from 'next/link';
 
 const FeaturesComp = () => {
     return (
-        <section className=' max-w-[1200px] mx-auto grid grid-cols-3 grid-rows-[250px_50px_250px] gap-5 tablet:gap-3 mt-28 mobile:grid-cols-1 mobile:grid-rows-[250px_250px_250px_250px_250px]'>
-            <div className=' col-span-1 row-span-3 rounded-lg bg-colorPrimary onlyTablet:col-span-2 onlyTablet:row-span-1 mobile:col-span-1 mobile:row-span-1 flex items-center justify-center relative border border-dashed border-white'>
+        <section className='max-w-[1200px] mx-auto grid grid-cols-3 grid-rows-[250px_50px_250px] gap-5 tablet:gap-3 mt-28 mobile:grid-cols-1 mobile:grid-rows-[250px_250px_250px_250px_250px]'>
+            <div className='col-span-1 row-span-3 rounded-lg bg-colorPrimary onlyTablet:col-span-2 onlyTablet:row-span-1 mobile:col-span-1 mobile:row-span-1 flex items-center justify-center relative border border-dashed border-white'>
                 <article className='flex items-center justify-center flex-col'>
                     <h2 className='text-[48px] font-semibold text-white'>
-                        VNB's partners
+                        VNB&apos;s partners
                     </h2>
                     <p className='max-w-[250px] text-center text-white font-medium text-lg'>
                         VNB is proud to be a partner of the following brands.
                     </p>
                 </article>
 
-                <div className=' absolute bottom-3 flex items-center gap-1'>
+                <div className='absolute bottom-3 flex items-center gap-1'>
                     <Link
                         href={''}
                         className='w-9 h-9 flex items-center justify-center rounded-full'>
@@ -29,10 +29,10 @@ const FeaturesComp = () => {
                     </Link>
                 </div>
 
-                <div className=' absolute w-full h-full'></div>
+                <div className='absolute w-full h-full'></div>
             </div>
 
-            <div className=' col-span-1 row-span-2 rounded-lg mobile:col-span-1 mobile:row-span-1 p-4 flex flex-col justify-between shadow-f'>
+            <div className='col-span-1 row-span-2 rounded-lg mobile:col-span-1 mobile:row-span-1 p-4 flex flex-col justify-between shadow-f'>
                 <figure className='w-[100px]'>
                     <Image
                         className='w-full tablet:w-[80px]'
@@ -48,14 +48,14 @@ const FeaturesComp = () => {
                     <Link href='https://www.yonex.com/'>
                         <h2 className='group text-[20px] font-medium mb-2 hover:cursor-pointer flex items-center gap-1'>
                             <span>Yonex</span>{' '}
-                            <i className=' text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
+                            <i className='text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
                         </h2>
                     </Link>
                     <p className='text-gray-500 text-start  text-color'>
                         Yonex Co., Ltd. is a Japanese sports equipment
                         manufacturing company. Yonex produces equipment and
                         apparel for tennis, badminton, golf, and running.{' '}
-                        <span className=' tablet:hidden'>
+                        <span className='tablet:hidden'>
                             Its range of products manufactured and
                             commercialised includes equipment for badminton and
                             tennis and golf.
@@ -79,7 +79,7 @@ const FeaturesComp = () => {
                     <Link href='https://www.kawasakijp.com/'>
                         <h2 className='group text-[20px] font-medium mb-2 hover:cursor-pointer flex items-center gap-1'>
                             <span>Kawasaki</span>{' '}
-                            <i className=' text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
+                            <i className='text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
                         </h2>
                     </Link>
                     <p className='text-gray-500 text-start  text-color'>
@@ -104,21 +104,21 @@ const FeaturesComp = () => {
                     <Link href='https://en.lining.com/'>
                         <h2 className='group text-[20px] font-medium mb-2 hover:cursor-pointer flex items-center gap-1'>
                             <span>Lining</span>{' '}
-                            <i className=' text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
+                            <i className='text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
                         </h2>
                     </Link>
                     <p className='text-gray-500 text-start  text-color'>
                         Li-Ning Company Limited is a Chinese sportswear and
                         sports equipment company founded by former Olympic
                         gymnast Li Ning.{' '}
-                        <span className=' tablet:hidden'>
+                        <span className='tablet:hidden'>
                             The company endorses a number of athletes and teams
                             worldwide
                         </span>
                     </p>
                 </article>
             </div>
-            <div className=' rounded-lg mobile:col-span-1 mobile:row-span-1 p-4 flex flex-col justify-between shadow-fo'>
+            <div className='rounded-lg mobile:col-span-1 mobile:row-span-1 p-4 flex flex-col justify-between shadow-fo'>
                 <figure className='w-[60px] tablet:w-[40px]'>
                     <Image
                         className='w-full'
@@ -134,7 +134,7 @@ const FeaturesComp = () => {
                     <Link href='https://www.adidas.com.vn/'>
                         <h2 className='group text-[20px] font-medium mb-2 hover:cursor-pointer flex items-center gap-1'>
                             <span>Adidas</span>{' '}
-                            <i className=' text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
+                            <i className='text-xs text-gray-400 fa-regular fa-arrow-up-right group-hover:translate-x-1 group-hover:translate-y-[-3px] transition-all duration-300'></i>
                         </h2>
                     </Link>
                     <p className='text-gray-500 text-start  text-color'>

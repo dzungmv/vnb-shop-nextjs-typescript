@@ -23,8 +23,6 @@ const CartPage: React.FC = () => {
     const router = useRouter();
     const cartStore: CartType[] = useSelector((state: any) => state.user.cart);
 
-    // console.log('Cart Store', cartStore);
-
     const user: UserTypes = useSelector((state: any) => state.user.user);
 
     const [cart, setCart] = useState<CartType[]>(cartStore);
@@ -126,7 +124,7 @@ const CartPage: React.FC = () => {
                     }
                 );
                 setIsPending(false);
-                // console.log(res.data);
+
                 setSuccess(true);
                 window.scrollTo(0, 0);
             } catch (error: any) {
@@ -194,7 +192,6 @@ const CartPage: React.FC = () => {
 
     useEffect(() => {
         if (success) {
-            // scroll to top smoothly
             window.scrollTo({
                 top: 0,
                 behavior: 'smooth',
@@ -208,7 +205,7 @@ const CartPage: React.FC = () => {
                 <section className='max-w-[1260px] mx-auto mt-9 mb-[100px] animate-fadeInTop'>
                     <div className='flex items-center gap-1 justify-center w-full'>
                         <i className='fa-solid fa-credit-card text-2xl'></i>
-                        <h2 className=' text-2xl font-bold'>Order</h2>
+                        <h2 className='text-2xl font-bold'>Order</h2>
                     </div>
 
                     <div className='flex gap-16 flex-wrap mt-5'>
@@ -262,7 +259,7 @@ const CartPage: React.FC = () => {
                                                 setPayment(e.target.value);
                                             }}
                                             checked={payment === 'cod'}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                         />
                                         <label
                                             htmlFor='cod'
@@ -283,7 +280,7 @@ const CartPage: React.FC = () => {
                                                 setPayment(e.target.value);
                                             }}
                                             checked={payment === 'banking'}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                         />
                                         <label
                                             htmlFor='banking'
@@ -375,7 +372,7 @@ const CartPage: React.FC = () => {
                                 </div>
                             )}
 
-                            <div className=' flex items-center justify-between mt-4'>
+                            <div className='flex items-center justify-between mt-4'>
                                 <div
                                     className='group flex items-center gap-1 hover:cursor-pointer'
                                     onClick={() => setSuccess(false)}>
@@ -403,7 +400,7 @@ const CartPage: React.FC = () => {
                 }>
                 <div className='flex items-center gap-1 justify-center w-full'>
                     <i className='fa-solid fa-cart-shopping text-2xl'></i>
-                    <h1 className=' text-2xl font-bold'>Your Cart</h1>
+                    <h1 className='text-2xl font-bold'>Your Cart</h1>
                 </div>
                 <div className='flex gap-16 flex-wrap mt-5'>
                     {cart && cart?.length > 0 ? (
@@ -455,7 +452,7 @@ const CartPage: React.FC = () => {
                                                                         <i className='fa-solid fa-minus text-sm text-white'></i>
                                                                     </button>
                                                                     <input
-                                                                        className=' text-center border border-colorPrimary w-[70px] py-1 text-sm rounded-md'
+                                                                        className='text-center border border-colorPrimary w-[70px] py-1 text-sm rounded-md'
                                                                         type='number'
                                                                         value={
                                                                             item.product_quantity
@@ -491,7 +488,7 @@ const CartPage: React.FC = () => {
                                                                 </div>
                                                             </div>
 
-                                                            <p className=' font-medium text-colorPrimary'>
+                                                            <p className='font-medium text-colorPrimary'>
                                                                 {item.product_price.toLocaleString()}
                                                                 ₫
                                                             </p>
@@ -554,21 +551,6 @@ const CartPage: React.FC = () => {
                             </div>
 
                             <div className='w-[calc(30%-32px)] tablet:w-full px-3 py-4 mobile:px-0'>
-                                {/* <div className='mb-6'>
-                                    <p className='text-xs'>
-                                        Enter promote code
-                                    </p>
-                                    <div className='border flex'>
-                                        <input
-                                            type='text'
-                                            className='flex-1 text-sm py-2 px-2 bg-transparent'
-                                        />
-                                        <button className='w-[30%] bg-black text-sm font-medium text-white '>
-                                            Submit
-                                        </button>
-                                    </div>
-                                </div> */}
-
                                 <div className='flex items-center justify-between text-sm'>
                                     <p>Shipping cost</p>
                                     <p>Free</p>

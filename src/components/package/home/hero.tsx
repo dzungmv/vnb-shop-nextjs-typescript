@@ -5,7 +5,7 @@ const HeroComp = () => {
     return (
         <section className='flex justify-between items-center pt-2 w-full flex-wrap mobile:mt-5'>
             <div className='w-[50%] pl-20 tablet:pl-0 mobile:w-full mobile:text-center'>
-                <h1 className=' text-[56px] font-semibold'>
+                <h1 className='text-[56px] font-semibold'>
                     Deeply reduce badminton products, <strong>upto 70%</strong>
                 </h1>
 
@@ -14,7 +14,7 @@ const HeroComp = () => {
                     badminton products
                 </p>
 
-                <Link className='' href='/product'>
+                <Link href='/product'>
                     <button className='mt-20 mobile:mt-9 py-4 px-10 text-[20px] font-medium bg-colorPrimary text-white rounded-[55px] hover:bg-colorPrimaryHover'>
                         Shop now
                     </button>

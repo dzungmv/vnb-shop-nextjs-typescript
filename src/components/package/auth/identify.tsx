@@ -60,7 +60,7 @@ const IdentifyPage: React.FC = () => {
 
                     <div className='flex items-center gap-2'>
                         <Link
-                            className=' font-medium text-colorPrimary hover:underline'
+                            className='font-medium text-colorPrimary hover:underline'
                             href={'/auth'}>
                             Sign up
                         </Link>
@@ -74,13 +74,13 @@ const IdentifyPage: React.FC = () => {
             </header>
 
             <div className='max-w-[1200px] bg-white p-3 rounded-lg shadow-md mobile:shadow-none mobile:rounded-none'>
-                <h2 className=' text-2xl font-medium mb-2'>
+                <h2 className='text-2xl font-medium mb-2'>
                     Reset your password!
                 </h2>
                 <hr />
                 <p className='mt-3'>
-                    Enter your email address and we'll send you OTP to reset
-                    your password.
+                    Enter your email address and we&apos;ll send you OTP to
+                    reset your password.
                 </p>
 
                 <input

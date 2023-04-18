@@ -42,7 +42,7 @@ const VefifyModal: React.FC = () => {
     return (
         <>
             <div className='w-[500px] p-4 mobile:w-full'>
-                <p className=' text-sm'>
+                <p className='text-sm'>
                     Please verify your account to continue using our service. We
                     have sent a verification email to your email address.
                 </p>

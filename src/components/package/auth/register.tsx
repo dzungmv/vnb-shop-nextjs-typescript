@@ -110,8 +110,8 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
 
     return (
         <>
-            <section className='w-[38%] tablet:w-full flex flex-col gap-3 border rounded-lg shadow-xl p-4 animate-fadeInRight'>
-                <figure className='hidden  tablet:flex items-center justify-center '>
+            <section className='w-[38%] tablet:w-full flex flex-col gap-3 border rounded-lg shadow-xl p-4 animate-fadeInRight mobile:shadow-none mobile:border-none'>
+                <figure className='hidden tablet:flex items-center justify-center'>
                     <Image
                         className='w-12 h-12 object-cover'
                         src={'/icon.png'}
@@ -128,9 +128,9 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                         content='Register in processing...'
                     />
                 )}
-                <div className=' border rounded-lg px-3'>
+                <div className='border rounded-lg px-3'>
                     <input
-                        className=' py-3 bg-transparent w-full text-sm'
+                        className='py-3 bg-transparent w-full text-sm'
                         type='text'
                         placeholder='Enter your name'
                         value={name}
@@ -146,9 +146,9 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                     </div>
                 )}
 
-                <div className=' border rounded-lg px-3'>
+                <div className='border rounded-lg px-3'>
                     <input
-                        className=' py-3 bg-transparent w-full text-sm'
+                        className='py-3 bg-transparent w-full text-sm'
                         type='text'
                         placeholder='Enter your email'
                         value={email}
@@ -164,9 +164,9 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                     </div>
                 )}
 
-                <div className=' border rounded-lg px-3'>
+                <div className='border rounded-lg px-3'>
                     <input
-                        className=' py-3 bg-transparent w-full text-sm'
+                        className='py-3 bg-transparent w-full text-sm'
                         type='password'
                         placeholder='Enter your password'
                         value={password}
@@ -182,9 +182,9 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                     </div>
                 )}
 
-                <div className=' border rounded-lg px-3'>
+                <div className='border rounded-lg px-3'>
                     <input
-                        className=' py-3 bg-transparent w-full text-sm'
+                        className='py-3 bg-transparent w-full text-sm'
                         type='password'
                         placeholder='Re-enter password'
                         value={rePassword}
@@ -211,7 +211,7 @@ const RegisterForm: React.FC<Props> = ({ handleChangeForm }) => {
                     Already have an account?{' '}
                     <span
                         onClick={() => handleChangeForm(false)}
-                        className=' font-medium text-colorPrimary hover:cursor-pointer hover:underline'>
+                        className='font-medium text-colorPrimary hover:cursor-pointer hover:underline'>
                         Login
                     </span>
                 </div>

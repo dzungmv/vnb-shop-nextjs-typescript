@@ -94,15 +94,15 @@ const PendingPage: React.FC = () => {
     };
     return (
         <>
-            <section className=''>
+            <section>
                 {!isPending ? (
-                    <div className=''>
+                    <div className='mt-7'>
                         {finalOrder && finalOrder.length > 0 ? (
                             finalOrder?.map((order: OrderType) => {
                                 return (
                                     <div
                                         key={order._id}
-                                        className=' px-3 py-4 border rounded mb-10'>
+                                        className='px-3 py-4 border rounded mb-10'>
                                         <div className='flex justify-end gap-2 mb-3'>
                                             <span className='text-sm text-yellow-500'>
                                                 Preparing to ship
@@ -171,7 +171,7 @@ const PendingPage: React.FC = () => {
                                                 <p className='flex items-center gap-1'>
                                                     <i className='fa-solid fa-coins text-colorPrimary'></i>
                                                     Total:{' '}
-                                                    <span className=' font-semibold text-lg text-colorPrimary'>
+                                                    <span className='font-semibold text-lg text-colorPrimary'>
                                                         {order.total.toLocaleString()}
                                                         ₫
                                                     </span>
@@ -210,9 +210,8 @@ const PendingPage: React.FC = () => {
                         )}
                     </div>
                 ) : (
-                    // Loading animation skeleton
                     <div className='h-[500px]'>
-                        <div className=' px-3 py-4 border rounded mb-10'>
+                        <div className='px-3 py-4 border rounded mb-10'>
                             <div className='flex justify-end mb-3'>
                                 <div className='w-[100px] h-[20px] bg-gray-200 animate-pulse'></div>
                             </div>
@@ -222,20 +221,20 @@ const PendingPage: React.FC = () => {
                                         <figure className='w-[100px] h-[100px] mobile:w-16 mobile:h-16 bg-gray-200 animate-pulse'></figure>
 
                                         <div className='flex-1'>
-                                            <h2 className=' w-[400px] mobile:w-[70px] h-5 bg-gray-200 animate-pulse mb-1'></h2>
-                                            <h2 className=' w-16 h-5 bg-gray-200 animate-pulse'></h2>
+                                            <h2 className='w-[400px] mobile:w-[70px] h-5 bg-gray-200 animate-pulse mb-1'></h2>
+                                            <h2 className='w-16 h-5 bg-gray-200 animate-pulse'></h2>
                                         </div>
                                     </div>
-                                    <div className=' w-16 h-5 bg-gray-200 animate-pulse'></div>
+                                    <div className='w-16 h-5 bg-gray-200 animate-pulse'></div>
                                 </div>
                             </div>
 
                             <hr className='w-[90%] mx-auto my-3' />
 
                             <div className='flex justify-between items-center'>
-                                <span className=' w-16 h-5 bg-gray-200 animate-pulse'></span>
+                                <span className='w-16 h-5 bg-gray-200 animate-pulse'></span>
                                 <div className='flex justify-center'>
-                                    <p className=' w-16 h-5 bg-gray-200 animate-pulse'></p>
+                                    <p className='w-16 h-5 bg-gray-200 animate-pulse'></p>
                                 </div>
                             </div>
                         </div>
@@ -251,7 +250,7 @@ const PendingPage: React.FC = () => {
                         setOrderId('');
                         setCancelModal(false);
                     }}>
-                    <div className='w-[500px] p-3'>
+                    <div className='w-[500px] p-3 mobile:w-full'>
                         <p className='py-5'>
                             Are you sure you want to cancel this order?
                         </p>

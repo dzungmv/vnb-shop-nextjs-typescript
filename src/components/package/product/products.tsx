@@ -202,10 +202,10 @@ const ProductsPage: React.FC = () => {
 
     return (
         <>
-            <section className=' max-w-[1260px] mx-auto mt-8 flex gap-5 items-start'>
+            <section className='max-w-[1260px] mx-auto mt-8 flex gap-5 items-start'>
                 <div className='w-[23%] rounded-lg border p-3 tablet:hidden'>
-                    <div className=' pb-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='pb-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.price.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -218,7 +218,7 @@ const ProductsPage: React.FC = () => {
                                             type='radio'
                                             id={item.title}
                                             value={item.value}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 setPrice(e.target.value);
                                             }}
@@ -236,8 +236,8 @@ const ProductsPage: React.FC = () => {
                     </div>
                     <hr />
 
-                    <div className=' py-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='py-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.brand.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -250,7 +250,7 @@ const ProductsPage: React.FC = () => {
                                             type='checkbox'
                                             id={item.title}
                                             value={item.title}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 if (e.target.checked) {
                                                     setBrand((prev) => [
@@ -281,8 +281,8 @@ const ProductsPage: React.FC = () => {
                     </div>
 
                     <hr />
-                    <div className=' py-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='py-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.agency.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -295,7 +295,7 @@ const ProductsPage: React.FC = () => {
                                             type='checkbox'
                                             id={item.title}
                                             value={item.title}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 if (e.target.checked) {
                                                     setStores((prev) => [
@@ -347,7 +347,7 @@ const ProductsPage: React.FC = () => {
                                         sizes='100vw'
                                     />
 
-                                    <div className='absolute text-white font-medium text-lg animate-fadeUp hidden group-hover:block z-1'>
+                                    <div className='absolute text-white font-medium text-lg animate-fadeUp hidden group-hover:block z-1 tablet:block tablet:animate-none'>
                                         {item.name}
                                     </div>
                                 </Link>
@@ -356,7 +356,7 @@ const ProductsPage: React.FC = () => {
                     </div>
 
                     <header className='flex items-center justify-between'>
-                        <h2 className=' font-medium text-xl'>Products</h2>
+                        <h2 className='font-medium text-xl'>Products</h2>
                         <div className='flex gap-2 items-center text-sm'>
                             <div>
                                 <i className='fa-solid fa-bars-sort'></i>
@@ -401,10 +401,17 @@ const ProductsPage: React.FC = () => {
                                 theme='light'
                                 placement='bottom'>
                                 <div
-                                    className='group hover:cursor-pointer'
+                                    className='group hover:cursor-pointer flex items-center gap-1'
                                     onMouseEnter={() => setIsHover(true)}
                                     onMouseLeave={() => setIsHover(false)}>
-                                    Default{' '}
+                                    {sort && sort.length > 0 ? (
+                                        <p className='first-letter:uppercase'>
+                                            {sort}
+                                        </p>
+                                    ) : (
+                                        'Default'
+                                    )}
+
                                     <i
                                         className={
                                             isHover
@@ -462,13 +469,13 @@ const ProductsPage: React.FC = () => {
                     className='w-[100%] p-3 fixed top-0 left-0 right-0 bottom-0 animate-fadeInLeft bg-white z-[1001] overflow-y-auto'>
                     <header className='flex justify-end'>
                         <div
-                            className=' w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full hover:cursor-pointer'
+                            className='w-9 h-9 flex items-center justify-center bg-gray-100 rounded-full hover:cursor-pointer'
                             onClick={() => setFilterBar((prev) => !prev)}>
                             <i className='fa-sharp fa-regular fa-xmark'></i>
                         </div>
                     </header>
-                    <div className=' pb-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='pb-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.price.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -481,7 +488,7 @@ const ProductsPage: React.FC = () => {
                                             type='radio'
                                             id={item.title}
                                             value={item.value}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 setPrice(e.target.value);
                                             }}
@@ -499,8 +506,8 @@ const ProductsPage: React.FC = () => {
                     </div>
                     <hr />
 
-                    <div className=' py-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='py-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.brand.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -513,7 +520,7 @@ const ProductsPage: React.FC = () => {
                                             type='checkbox'
                                             id={item.title}
                                             value={item.title}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 if (e.target.checked) {
                                                     setBrand((prev) => [
@@ -544,8 +551,8 @@ const ProductsPage: React.FC = () => {
                     </div>
 
                     <hr />
-                    <div className=' py-4'>
-                        <h2 className=' font-medium mb-2 text-lg text-gray-600'>
+                    <div className='py-4'>
+                        <h2 className='font-medium mb-2 text-lg text-gray-600'>
                             {filterUI.agency.name}
                         </h2>
                         <div className='flex flex-col gap-2'>
@@ -558,7 +565,7 @@ const ProductsPage: React.FC = () => {
                                             type='checkbox'
                                             id={item.title}
                                             value={item.title}
-                                            className=' hover:cursor-pointer'
+                                            className='hover:cursor-pointer'
                                             onChange={(e) => {
                                                 if (e.target.checked) {
                                                     setStores((prev) => [

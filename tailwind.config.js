@@ -8,13 +8,6 @@ module.exports = {
                 colorPrimaryHover: '#D70043',
                 bgGray: 'rgba(22, 24, 35, 0.07)',
             },
-            backgroundColor: {
-                bgModal: 'rgba(0, 0, 0, 0.5)',
-            },
-            backgroundImage: {
-                feature:
-                    'linear-gradient(135deg, rgb(255, 159, 181) 0%, rgb(168, 9, 70) 100%)',
-            },
             screens: {
                 mobile: { max: '600px' },
                 onlyTablet: { min: '601px', max: '1023px' },
@@ -26,9 +19,6 @@ module.exports = {
             },
             padding: {
                 px10: '10px',
-            },
-            gridTemplateRows: {
-                featuresRows: '350px 100px 350px',
             },
             animation: {
                 fadeUp: 'fadeUp 0.3s ease-in-out',
@@ -98,10 +88,10 @@ module.exports = {
                 },
             },
             boxShadow: {
-                f: '#3644b7 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
-                s: '#925ff6 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
-                t: '#d781f0 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
-                fo: '#f5e3c2 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;',
+                f: '#3644b7 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+                s: '#925ff6 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+                t: '#d781f0 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
+                fo: '#f5e3c2 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px',
             },
         },
     },

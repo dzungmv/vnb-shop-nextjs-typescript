@@ -10,11 +10,11 @@ type Props = {
 
 const NotFoundPage: React.FC = ({ title }: Props) => {
     return (
-        <section className=' max-w-[1200px] mx-auto w-full flex items-center'>
+        <section className='max-w-[1200px] mx-auto w-full flex items-center'>
             <div className='w-[40%] text-right mr-[-64px] z-10 mobile:hidden'>
-                <h2 className=' text-5xl font-medium'>Opps, 404!</h2>
+                <h2 className='text-5xl font-medium'>Opps, 404!</h2>
 
-                <p className=' my-6 text-lg text-medium'>
+                <p className='my-6 text-lg text-medium'>
                     {title ?? 'Not found product'}
                 </p>
 

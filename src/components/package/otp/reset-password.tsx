@@ -136,7 +136,7 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                     <h3 className='text-2xl font-medium'>{title}</h3>
                     <p className='mt-3'>
                         We just sent OTP to your email{' '}
-                        <span className=' text-colorPrimary font-medium'>
+                        <span className='text-colorPrimary font-medium'>
                             {emailFormatted}
                         </span>
                     </p>
@@ -163,7 +163,7 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                         <input
                             type='password'
                             placeholder='New password'
-                            className=' px-2 py-3 w-full border rounded-md text-sm'
+                            className='px-2 py-3 w-full border rounded-md text-sm'
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                         />
@@ -171,14 +171,14 @@ const OtpResetPassword: React.FC<OtpTypes> = ({ title, email }) => {
                         <input
                             type='password'
                             placeholder='New password'
-                            className=' px-2 py-3 w-full border rounded-md text-sm mt-3'
+                            className='px-2 py-3 w-full border rounded-md text-sm mt-3'
                             value={confirmPassword}
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                     </div>
 
                     <p className='text-center mt-8 text-sm '>
-                        Didn't receive OTP?{' '}
+                        Didn&apos;t receive OTP?{' '}
                         {disabled ? (
                             <span className='font-medium text-colorPrimary'>
                                 {countDown}

@@ -78,11 +78,11 @@ const LoginComp: React.FC = () => {
 
     return (
         <>
-            <main className='flex items-center justify-center h-[85vh] w-full mobile:px-4'>
-                <section className='flex w-[75%] h-[75%] items-center laptop:w-full  mobile:w-full'>
+            <main className='flex items-center justify-center h-[85vh] w-full'>
+                <section className='flex w-[75%] h-[75%] items-center laptop:w-full mobile:w-full'>
                     <figure className='w-[64%] laptop:w-[50%] h-full tablet:hidden'>
                         <Image
-                            className=' w-full h-full object-cover'
+                            className='w-full h-full object-cover'
                             src={'/badminton.webp'}
                             alt='badminton'
                             width='0'
@@ -95,8 +95,8 @@ const LoginComp: React.FC = () => {
                             handleChangeForm={() => setChangeForm(false)}
                         />
                     ) : (
-                        <section className='w-[38%] tablet:w-full flex flex-col gap-3 border rounded-lg shadow-xl p-4 animate-fadeInLeft'>
-                            <figure className='hidden  tablet:flex items-center justify-center '>
+                        <section className='w-[38%] tablet:w-full flex flex-col gap-3 border rounded-lg shadow-xl p-4 animate-fadeInLeft mobile:shadow-none mobile:border-none'>
+                            <figure className='hidden tablet:flex items-center justify-center'>
                                 <Image
                                     className='w-12 h-12 object-cover'
                                     src={'/icon.png'}
@@ -115,9 +115,9 @@ const LoginComp: React.FC = () => {
                                 />
                             )}
 
-                            <div className=' border rounded-lg px-3'>
+                            <div className='border rounded-lg px-3'>
                                 <input
-                                    className=' py-3 bg-transparent w-full text-sm'
+                                    className='py-3 bg-transparent w-full text-sm'
                                     type='text'
                                     placeholder='Email'
                                     value={email}
@@ -133,9 +133,9 @@ const LoginComp: React.FC = () => {
                                 </div>
                             )}
 
-                            <div className=' border rounded-lg px-3'>
+                            <div className='border rounded-lg px-3'>
                                 <input
-                                    className=' py-3 bg-transparent w-full text-sm'
+                                    className='py-3 bg-transparent w-full text-sm'
                                     type='password'
                                     placeholder='Password'
                                     value={password}
@@ -160,7 +160,7 @@ const LoginComp: React.FC = () => {
 
                             <Link
                                 href='/identify'
-                                className=' text-center text-colorPrimary font-medium text-sm hover:underline'>
+                                className='text-center text-colorPrimary font-medium text-sm hover:underline'>
                                 Forgot password?
                             </Link>
 

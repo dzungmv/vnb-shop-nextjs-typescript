@@ -10,9 +10,9 @@ const LoadingCard: React.FC<LoadingCardTypes> = ({
     content,
 }) => {
     return (
-        <div className=' flex items-center p-2 gap-3 bg-[#fcebf1] rounded-md'>
+        <div className='flex items-center p-2 gap-3 bg-[#fcebf1] rounded-md'>
             <span
-                className={`rounded-full inline-block border-t-[2px] border-t-colorPrimary border-r-[2px] border-r-transparent animate-rotate`}
+                className='rounded-full inline-block border-t-[2px] border-t-colorPrimary border-r-[2px] border-r-transparent animate-rotate'
                 style={{
                     width: `${width}px`,
                     height: `${height}px`,

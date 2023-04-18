@@ -2,10 +2,10 @@ import Link from 'next/link';
 
 const Footer = () => {
     return (
-        <footer className='mt-28 laptop:px-4 tablet:px-4  border-t pt-6'>
-            <section className=' max-w-[1260px] mx-auto flex flex-wrap gap-5 gap-y-6 mb-10'>
+        <footer className='mt-28 laptop:px-4 tablet:px-4 border-t pt-6'>
+            <section className='max-w-[1260px] mx-auto flex flex-wrap gap-5 gap-y-6 mb-10'>
                 <div className='w-[calc(40%-15px)] onlyTablet:w-[calc(60%-15px)] mobile:w-full'>
-                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                    <h2 className='text-[18px] font-medium text-gray-600 mb-3'>
                         General Information
                     </h2>
                     <p className='text-sm mb-2'>
@@ -15,19 +15,19 @@ const Footer = () => {
                         movement to professional.
                     </p>
                     <p className='text-sm mb-2'>
-                        <strong>Mission:</strong> "VNB is committed to bringing
-                        the best quality products and services to sports players
-                        to improve their own health."
+                        <strong>Mission:</strong> &quot;VNB is committed to
+                        bringing the best quality products and services to
+                        sports players to improve their own health.&quot;
                     </p>
 
                     <p className='text-[14px]'>
-                        <strong>Vision:</strong> "Become a distributor and
-                        Vietnam's largest sports producer"
+                        <strong>Vision:</strong> &quot;Become a distributor and
+                        Vietnam&apos;s largest sports producer&quot;
                     </p>
                 </div>
 
                 <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(40%-15px)] mobile:w-full'>
-                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                    <h2 className='text-[18px] font-medium text-gray-600 mb-3'>
                         Contact Informations
                     </h2>
                     <p className='text-sm mb-2'>
@@ -58,7 +58,7 @@ const Footer = () => {
                 </div>
 
                 <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(100%/2-15px)] mobile:w-full'>
-                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                    <h2 className='text-[18px] font-medium text-gray-600 mb-3'>
                         Policy
                     </h2>
                     <Link href={'/'} className='text-sm mb-2 hover:underline'>
@@ -87,7 +87,7 @@ const Footer = () => {
                 </div>
 
                 <div className='w-[calc(60%/3-15px)] onlyTablet:w-[calc(100%/2-15px)] mobile:w-full'>
-                    <h2 className=' text-[18px] font-medium text-gray-600 mb-3'>
+                    <h2 className='text-[18px] font-medium text-gray-600 mb-3'>
                         Guides
                     </h2>
                     <Link href={'/'} className='text-sm mb-2 hover:underline'>
@@ -113,13 +113,13 @@ const Footer = () => {
             </section>
 
             <section className='text-center pb-3'>
-                <p className=' text-sm'>
+                <p className='text-sm'>
                     Copy right &#169; 2023 VNB Sports | All rights reserved
                 </p>
                 <p className='text-sm'>
                     Clone and design by{' '}
                     <Link
-                        className=' font-medium text-colorPrimary'
+                        className='font-medium text-colorPrimary'
                         href={'https://www.facebook.com/jungjung.2601/'}
                         passHref
                         target='_blank'>

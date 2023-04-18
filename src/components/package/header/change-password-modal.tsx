@@ -100,7 +100,7 @@ const ChangePasswordModal: React.FC = () => {
                 )}
             </div>
 
-            <div className=' mt-10 flex items-center justify-end gap-2 '>
+            <div className='mt-10 flex items-center justify-end gap-2'>
                 <button
                     className='font-medium hover:underline hover:cursor-pointer disabled:text-gray-500'
                     onClick={() => dispatch(setChangePasswordModal(false))}

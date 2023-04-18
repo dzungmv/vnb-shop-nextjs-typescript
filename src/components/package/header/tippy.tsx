@@ -74,7 +74,7 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                             User is not verify, verify now!
                         </span>
 
-                        <div className=' w-2 h-2 rounded-full flex items-center justify-center bg-colorPrimary'></div>
+                        <div className='w-2 h-2 rounded-full flex items-center justify-center bg-colorPrimary'></div>
                     </div>
                 )}
 
@@ -84,7 +84,7 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-sharp fa-regular fa-bags-shopping'></i>
                     </div>
-                    <span className=' text-sm font-medium'>Ordered</span>
+                    <span className='text-sm font-medium'>Ordered</span>
                 </div>
 
                 <div
@@ -93,9 +93,7 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-sharp fa-solid fa-key'></i>
                     </div>
-                    <span className=' text-sm font-medium'>
-                        Change password
-                    </span>
+                    <span className='text-sm font-medium'>Change password</span>
                 </div>
 
                 <hr />
@@ -106,7 +104,7 @@ const TippyComp: React.FC<TippyCompProps> = ({ tipRef }) => {
                     <div className='w-[35px] h-[35px] rounded-full flex items-center justify-center bg-gray-200'>
                         <i className='fa-solid fa-right-from-bracket'></i>
                     </div>
-                    <span className=' text-sm font-medium'>Logout</span>
+                    <span className='text-sm font-medium'>Logout</span>
                 </div>
 
                 {isPending && (

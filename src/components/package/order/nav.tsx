@@ -34,7 +34,7 @@ const OrderNavBar: React.FC = () => {
     const pathname = usePathname();
 
     return (
-        <nav className='mt-3 flex items-center justify-center'>
+        <nav className='mt-3 flex items-center flex-wrap justify-center mobile:'>
             {NAVS.map((nav: NavProps, index: number) => {
                 return (
                     <Link

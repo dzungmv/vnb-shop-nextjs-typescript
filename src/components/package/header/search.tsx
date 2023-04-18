@@ -46,7 +46,7 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
     }, [searchDeb]);
 
     return (
-        <div className='w-full h-[80%]  relative flex'>
+        <div className='w-full h-[80%] relative flex'>
             <div
                 className='mr-2 w-10 h-10 flex items-center justify-center rounded-full hover:cursor-pointer hover:bg-slate-100'
                 onClick={() => {
@@ -56,17 +56,17 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
                 }}>
                 <i className='fa-regular fa-arrow-left text-lg text-gray-600'></i>
             </div>
-            <div className=' w-full h-full bg-bgGray rounded-[20px] flex items-center gap-2 flex-1'>
+            <div className='w-full h-full bg-bgGray rounded-[20px] flex items-center gap-2 flex-1'>
                 <i className='fa-regular fa-magnifying-glass text-gray-500 ml-3'></i>
                 <input
-                    className=' bg-transparent py-px10 w-full text-sm  placeholder:text-gray-500'
+                    className='bg-transparent py-px10 w-full text-sm placeholder:text-gray-500'
                     type='text'
                     placeholder='Search product...'
                     onChange={(e) => setSearchValue(e.target.value)}
                 />
             </div>
 
-            <div className=' absolute top-[-5px] z-[-1] w-[101%] left-[50%] rounded-b-lg translate-x-[-50%] max-h-[50vh] bg-white shadow-2xl l-0 r-0 pt-14 px-5 pb-4'>
+            <div className='absolute top-[-5px] z-[-1] w-[101%] left-[50%] rounded-b-lg translate-x-[-50%] bg-white shadow-2xl l-0 r-0 pt-14 px-5 pb-4'>
                 {searchValue && searchDeb ? (
                     searchPending ? (
                         <div className='my-4 ml-7'>
@@ -112,12 +112,12 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
                             );
                         })
                     ) : (
-                        <p className=' text-sm text-gray-500 text-center py-2'>
+                        <p className='text-sm text-gray-500 text-center py-2'>
                             Not found any product
                         </p>
                     )
                 ) : (
-                    <p className=' text-sm text-gray-500 text-center py-2'>
+                    <p className='text-sm text-gray-500 text-center py-2'>
                         No search recently
                     </p>
                 )}
