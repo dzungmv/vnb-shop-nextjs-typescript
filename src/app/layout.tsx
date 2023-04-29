@@ -29,7 +29,9 @@ export const metadata = {
         title: 'ShopVNB - Badminton Store System',
         description:
             'VNB Sports is a badminton store system with more than 50 branches nationwide, providing wholesale and retail badminton equipment from movement to professional.',
-        image: 'thumbnail.jpeg',
+        images: [
+            'https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/thumbnail.jpeg',
+        ],
     },
     facebook: {
         card: 'summary_large_image',
@@ -38,7 +40,22 @@ export const metadata = {
         title: 'ShopVNB - Badminton Store System',
         description:
             'VNB Sports is a badminton store system with more than 50 branches nationwide, providing wholesale and retail badminton equipment from movement to professional.',
-        images: 'thumbnail.jpeg',
+        images: [
+            'https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/thumbnail.jpeg',
+        ],
+    },
+    other: {
+        facebook: {
+            card: 'summary_large_image',
+            site: '@shopvnb',
+            creator: '@shopvnb',
+            title: 'ShopVNB - Badminton Store System',
+            description:
+                'VNB Sports is a badminton store system with more than 50 branches nationwide, providing wholesale and retail badminton equipment from movement to professional.',
+            images: [
+                'https://jungjung261.blob.core.windows.net/nextjs-project/VNB_SHOP/thumbnail.jpeg',
+            ],
+        },
     },
 };
 
