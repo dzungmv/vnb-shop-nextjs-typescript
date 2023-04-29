@@ -5,9 +5,22 @@ export const metadata = {
     title: 'ShopVNB',
     description:
         'VNB Sports is a badminton store system with more than 50 branches nationwide, providing wholesale and retail badminton equipment from movement to professional.',
-    image: 'thumbnail.jpeg',
+    images: ['thumbnail.jpeg'],
     icons: {
         icon: 'icon.png',
+    },
+    robots: {
+        googleBot: {
+            index: true,
+            follow: false,
+            noimageindex: true,
+            'max-video-preview': -1,
+            'max-image-preview': 'large',
+            'max-snippet': -1,
+        },
+
+        nocache: true,
+        follow: true,
     },
 };
 
