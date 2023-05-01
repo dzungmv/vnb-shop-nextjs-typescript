@@ -2,6 +2,8 @@ import { Providers } from '@/components/redux/provider';
 import '../components/styles/globals.css';
 
 export const metadata = {
+    metadataBase: new URL('https://vnb-shop.netlify.app/'),
+
     title: 'ShopVNB',
     description:
         'VNB Sports is a badminton store system with more than 50 branches nationwide, providing wholesale and retail badminton equipment from movement to professional.',
