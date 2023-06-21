@@ -58,6 +58,7 @@ const SearchComp: React.FC<Props> = ({ changeState }) => {
                     type='text'
                     placeholder='Search product...'
                     onChange={(e) => setSearchValue(e.target.value)}
+                    autoFocus
                 />
             </div>
 
